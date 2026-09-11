@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools<81", "wheel>=0.46.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dash-pdf-components"
+version = "0.1.0"
+description = "React-PDF rendering components for Plotly Dash"
+authors = [{ name = "C0deBeez", email = "ethan.zhang2016@gmail.com" }]
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+classifiers = ["Framework :: Dash", "Framework :: Flask"]
+requires-python = ">=3.10"
+dependencies = ["dash>=2.0.0"]
+
+[tool.setuptools]
+packages = ["dash_pdf_components"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+dash_pdf_components = ["*.js", "*.css", "*.json", "pdfjs/**/*"]
+
+[tool.setuptools.exclude-package-data]
+dash_pdf_components = ["*.map"]
+
+[dependency-groups]
+dev = [
+    "dash[testing]>=4.4.1",
+    "pyyaml>=6.0.3",
+    "pyright>=1.1.405",
+    "pytest>=8.0.0",
+    "ruff>=0.13.0",
+]
+
+[tool.ruff]
+line-length = 130
+target-version = "py310"
+exclude = ["dash_pdf_components"]
+
+[tool.pyright]
+include = ["tests"]
+extraPaths = ["."]
+pythonVersion = "3.10"
+typeCheckingMode = "standard"

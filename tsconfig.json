@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "paths": {
+            "*": ["./src/*"]
+        },
+        "inlineSources": false,
+        "sourceMap": false,
+        "target": "es2015",
+        "lib": ["dom", "es2020"],
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "exclude": ["node_modules"]
+}

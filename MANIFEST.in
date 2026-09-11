@@ -1,0 +1,6 @@
+recursive-include dash_pdf_components *.js *.css *.json *.mjs *.bcmap *.pfb *.ttf *.otf *.wasm *.svg *.gif
+recursive-exclude dash_pdf_components *.map
+prune tests
+include README.md
+include LICENSE
+include dash_pdf_components/package-info.json
