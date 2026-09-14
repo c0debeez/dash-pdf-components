@@ -251,7 +251,10 @@ if UI == "antd":
                 dac.Space(
                     [
                         dcc.Upload(
-                            dac.Button("Upload PDF"), id="pdf-upload", accept="application/pdf,.pdf", max_size=20 * 1024 * 1024
+                            dac.Button("Upload PDF"),
+                            id="pdf-upload",
+                            accept="application/pdf,.pdf",
+                            max_size=20 * 1024 * 1024,
                         ),
                         dac.Button("Reset demo", id="pdf-reset"),
                         dac.Button("Encrypted demo (password: dash-pdf)", id="pdf-encrypted"),
@@ -269,7 +272,9 @@ if UI == "antd":
                 dac.Space(
                     [
                         icon_button("pdf-previous", "left-outlined", "Previous page"),
-                        dac.InputNumber(id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, precision=0, style={"width": 88}),
+                        dac.InputNumber(
+                            id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, precision=0, style={"width": 88}
+                        ),
                         dac.Text(id="pdf-page-count", type="secondary"),
                         icon_button("pdf-next", "right-outlined", "Next page"),
                         icon_button("pdf-zoom-out", "zoom-out-outlined", "Zoom out"),
@@ -286,7 +291,9 @@ if UI == "antd":
                 dac.Space(
                     [
                         dac.Text("This PDF requires a password."),
-                        dac.Input(id="pdf-password-input", type="password", placeholder="PDF password", style={"width": 220}),
+                        dac.Input(
+                            id="pdf-password-input", type="password", placeholder="PDF password", style={"width": 220}
+                        ),
                         dac.Button("Unlock", id="pdf-unlock", type="primary"),
                     ],
                     id="pdf-password-prompt",
@@ -339,7 +346,11 @@ else:
     def icon_button(id, icon, label):
         return dmc.Tooltip(
             dmc.ActionIcon(
-                DashIconify(icon=f"tabler:{icon}", width=20), id=id, variant="default", size="input-sm", **{"aria-label": label}
+                DashIconify(icon=f"tabler:{icon}", width=20),
+                id=id,
+                variant="default",
+                size="input-sm",
+                **{"aria-label": label},
             ),
             label=label,
         )
@@ -376,7 +387,9 @@ else:
                     dmc.Group(
                         [
                             icon_button("pdf-previous", "chevron-left", "Previous page"),
-                            dmc.NumberInput(id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, allowDecimal=False, w=88),
+                            dmc.NumberInput(
+                                id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, allowDecimal=False, w=88
+                            ),
                             dmc.Text(id="pdf-page-count", c="dimmed", size="sm"),
                             icon_button("pdf-next", "chevron-right", "Next page"),
                             icon_button("pdf-zoom-out", "zoom-out", "Zoom out"),
@@ -391,7 +404,9 @@ else:
                     ),
                     dmc.Group(
                         [
-                            dmc.Progress(id="pdf-progress", value=0, style={"flex": 1}, **{"aria-label": "PDF loading progress"}),
+                            dmc.Progress(
+                                id="pdf-progress", value=0, style={"flex": 1}, **{"aria-label": "PDF loading progress"}
+                            ),
                             dmc.Text(id="pdf-progress-label", size="sm", w=40),
                         ],
                         gap="sm",
@@ -424,7 +439,9 @@ else:
     register_callbacks(app, Output("pdf-loading", "visible"))
 
     @app.callback(
-        Output("pdf-password-prompt", "style"), Output("pdf-message", "sendNotifications"), Input("pdf-document", "passwordData")
+        Output("pdf-password-prompt", "style"),
+        Output("pdf-message", "sendNotifications"),
+        Input("pdf-document", "passwordData"),
     )
     def show_password_prompt(challenge):
         if not challenge:

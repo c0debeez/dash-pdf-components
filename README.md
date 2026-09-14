@@ -91,12 +91,3 @@ dpc.PDF(
 `workerSrc`, `imageResourcesPath`, and individual `options` values such as `cMapUrl`, `standardFontDataUrl`, `wasmUrl`, and `iccUrl` override the defaults. These options are also available on `Document`.
 
 Internal PDF links navigate automatically. `PDF` and a single rendered `Page` switch to the destination page, while documents rendering multiple pages scroll to the mounted destination. `itemClickData` remains available for observing navigation.
-
-## Development
-
-```bash
-pnpm install
-uv sync
-pnpm build
-uv build --no-sources
-```
