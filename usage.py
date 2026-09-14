@@ -114,6 +114,7 @@ def render_thumbnails(num_pages):
                 dpc.Thumbnail(id={"type": "pdf-thumbnail", "index": number}, pageNumber=number, width=130),
                 html.Div(f"Page {number}"),
             ],
+            id={"type": "pdf-thumbnail-item", "index": number},
             className="pdf-thumbnail",
             **{"data-thumbnail-page": str(number)},
         )
@@ -149,9 +150,58 @@ def download_pdf(_n_clicks, file, filename):
     return dcc.send_file(str(ASSETS / "documents" / name), type="application/pdf")
 
 
+def navigate(_previous, _next, requested_page, item_click, outline_click, thumbnail_clicks, num_pages, _file, current_page):
+    prop_id = ctx.triggered[0]["prop_id"] if ctx.triggered else ""
+    page = current_page or 1
+    if prop_id == "pdf-document.file":
+        page = 1
+    elif prop_id == "pdf-previous.n_clicks":
+        page -= 1
+    elif prop_id == "pdf-next.n_clicks":
+        page += 1
+    elif prop_id == "pdf-page-number.value":
+        page = requested_page or page
+    elif prop_id == "pdf-document.itemClickData" and item_click:
+        page = item_click["pageNumber"]
+    elif prop_id == "pdf-outline.itemClickData" and outline_click:
+        page = outline_click["pageNumber"]
+    elif "pdf-thumbnail" in prop_id:
+        latest = max((click for click in thumbnail_clicks or [] if click), key=lambda click: click["timestamp"], default=None)
+        if not latest:
+            return no_update, no_update
+        page = latest["pageNumber"]
+    page = max(1, min(int(page), num_pages or int(page)))
+    return page, page
+
+
+def zoom(_out, _in, _fit, scale, viewport_width):
+    if ctx.triggered_id == "pdf-fit-width":
+        return "fit"
+    current = (viewport_width or PAGE_WIDTH) / PAGE_WIDTH if scale == "fit" else float(scale or 1)
+    if ctx.triggered_id == "pdf-zoom-in":
+        return str(next((value for value in ZOOM_PRESETS if value > current + 0.001), ZOOM_PRESETS[-1]))
+    return str(next((value for value in reversed(ZOOM_PRESETS) if value < current - 0.001), ZOOM_PRESETS[0]))
+
+
+def select_thumbnails(page, _children, items):
+    return ["true" if item["index"] == (page or 1) else "false" for item in items]
+
+
+def status(num_pages, error, challenge, page):
+    ready = bool(num_pages)
+    page = page or 1
+    return (
+        f"/ {num_pages or '-'}",
+        num_pages or PAGE_COUNT,
+        not ready and not error and not challenge,
+        not ready or page <= 1,
+        not ready or page >= num_pages,
+        not ready,
+    )
+
+
 def register_callbacks(app, loading_output):
-    app.clientside_callback(
-        ClientsideFunction(namespace="pdfViewer", function_name="navigate"),
+    app.callback(
         Output("pdf-current-page", "data"),
         Output("pdf-page-number", "value"),
         Input("pdf-previous", "n_clicks"),
@@ -164,9 +214,8 @@ def register_callbacks(app, loading_output):
         Input("pdf-document", "file"),
         State("pdf-current-page", "data"),
         prevent_initial_call=True,
-    )
-    app.clientside_callback(
-        ClientsideFunction(namespace="pdfViewer", function_name="zoom"),
+    )(navigate)
+    app.callback(
         Output("pdf-scale", "value"),
         Input("pdf-zoom-out", "n_clicks"),
         Input("pdf-zoom-in", "n_clicks"),
@@ -174,7 +223,7 @@ def register_callbacks(app, loading_output):
         State("pdf-scale", "value"),
         State("pdf-viewport-width", "data"),
         prevent_initial_call=True,
-    )
+    )(zoom)
     app.clientside_callback(
         ClientsideFunction(namespace="pdfViewer", function_name="measure"),
         Output("pdf-viewport-width", "data"),
@@ -191,10 +240,14 @@ def register_callbacks(app, loading_output):
         Input("pdf-outline", "itemClickData"),
         Input({"type": "pdf-thumbnail", "index": ALL}, "itemClickData"),
         Input({"type": "pdf-page", "index": ALL}, "renderData"),
-        Input("pdf-thumbnails", "children"),
     )
-    app.clientside_callback(
-        ClientsideFunction(namespace="pdfViewer", function_name="status"),
+    app.callback(
+        Output({"type": "pdf-thumbnail-item", "index": ALL}, "data-selected"),
+        Input("pdf-current-page", "data"),
+        Input("pdf-thumbnails", "children"),
+        State({"type": "pdf-thumbnail-item", "index": ALL}, "id"),
+    )(select_thumbnails)
+    app.callback(
         Output("pdf-page-count", "children"),
         Output("pdf-page-number", "max"),
         loading_output,
@@ -205,7 +258,7 @@ def register_callbacks(app, loading_output):
         Input("pdf-document", "errorData"),
         Input("pdf-document", "passwordData"),
         Input("pdf-current-page", "data"),
-    )
+    )(status)
     app.callback(
         Output("pdf-pages", "children"),
         Input("pdf-current-page", "data"),
@@ -281,9 +334,7 @@ if UI == "antd":
                 dac.Space(
                     [
                         icon_button("pdf-previous", "left-outlined", "Previous page"),
-                        dac.InputNumber(
-                            id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, precision=0, style={"width": 88}
-                        ),
+                        dac.InputNumber(id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, precision=0, style={"width": 88}),
                         dac.Text(id="pdf-page-count", type="secondary"),
                         icon_button("pdf-next", "right-outlined", "Next page"),
                         icon_button("pdf-zoom-out", "zoom-out-outlined", "Zoom out"),
@@ -300,9 +351,7 @@ if UI == "antd":
                 dac.Space(
                     [
                         dac.Text("This PDF requires a password."),
-                        dac.Input(
-                            id="pdf-password-input", type="password", placeholder="PDF password", style={"width": 220}
-                        ),
+                        dac.Input(id="pdf-password-input", type="password", placeholder="PDF password", style={"width": 220}),
                         dac.Button("Unlock", id="pdf-unlock", type="primary"),
                     ],
                     id="pdf-password-prompt",
@@ -396,9 +445,7 @@ elif UI == "mantine":
                     dmc.Group(
                         [
                             icon_button("pdf-previous", "chevron-left", "Previous page"),
-                            dmc.NumberInput(
-                                id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, allowDecimal=False, w=88
-                            ),
+                            dmc.NumberInput(id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, allowDecimal=False, w=88),
                             dmc.Text(id="pdf-page-count", c="dimmed", size="sm"),
                             icon_button("pdf-next", "chevron-right", "Next page"),
                             icon_button("pdf-zoom-out", "zoom-out", "Zoom out"),
@@ -413,9 +460,7 @@ elif UI == "mantine":
                     ),
                     dmc.Group(
                         [
-                            dmc.Progress(
-                                id="pdf-progress", value=0, style={"flex": 1}, **{"aria-label": "PDF loading progress"}
-                            ),
+                            dmc.Progress(id="pdf-progress", value=0, style={"flex": 1}, **{"aria-label": "PDF loading progress"}),
                             dmc.Text(id="pdf-progress-label", size="sm", w=40),
                         ],
                         gap="sm",
@@ -481,4 +526,4 @@ else:
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=False, port=5000)

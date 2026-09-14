@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dash-pdf-components"
-version = "0.1.1"
+version = "0.1.2"
 description = "React-PDF rendering components for Plotly Dash"
 authors = [{ name = "C0deBeez", email = "ethan.zhang2016@gmail.com" }]
 readme = "README.md"
@@ -31,6 +31,7 @@ dev = [
     "pyright>=1.1.405",
     "pytest>=8.0.0",
     "ruff>=0.13.0",
+    "dash-pdf-components",
 ]
 
 [tool.ruff]
@@ -43,3 +44,6 @@ include = ["tests"]
 extraPaths = ["."]
 pythonVersion = "3.10"
 typeCheckingMode = "standard"
+
+[tool.uv.sources]
+dash-pdf-components = { workspace = true }

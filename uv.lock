@@ -448,7 +448,7 @@ testing = [
 
 [[package]]
 name = "dash-pdf-components"
-version = "0.1.1"
+version = "0.1.2"
 source = { editable = "." }
 dependencies = [
     { name = "dash" },
@@ -457,6 +457,7 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "dash", extra = ["testing"] },
+    { name = "dash-pdf-components" },
     { name = "pyright" },
     { name = "pytest" },
     { name = "pyyaml" },
@@ -469,6 +470,7 @@ requires-dist = [{ name = "dash", specifier = ">=2.0.0" }]
 [package.metadata.requires-dev]
 dev = [
     { name = "dash", extras = ["testing"], specifier = ">=4.4.1" },
+    { name = "dash-pdf-components", editable = "." },
     { name = "pyright", specifier = ">=1.1.405" },
     { name = "pytest", specifier = ">=8.0.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },

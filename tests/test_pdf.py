@@ -1,3 +1,4 @@
+import ast
 import importlib.util
 import inspect
 import json
@@ -5,6 +6,7 @@ import shutil
 import subprocess
 import typing
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -35,6 +37,30 @@ def test_basic_usage_needs_no_ui_library(monkeypatch):
     response = module.app.server.test_client().get(viewer.file)
     assert response.status_code == 200
     assert response.data.startswith(b"%PDF-")
+
+
+def test_advanced_usage_callback_rules():
+    root = Path(__file__).resolve().parents[1]
+    source = ast.parse((root / "usage.py").read_text())
+    functions = [
+        node for node in source.body if isinstance(node, ast.FunctionDef) and node.name in {"navigate", "zoom", "status"}
+    ]
+    context = SimpleNamespace(triggered=[{"prop_id": "pdf-next.n_clicks"}], triggered_id="pdf-next")
+    namespace = {
+        "ctx": context,
+        "PAGE_WIDTH": 600,
+        "PAGE_COUNT": 4,
+        "ZOOM_PRESETS": (0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4),
+        "no_update": object(),
+    }
+    exec(compile(ast.Module(body=functions, type_ignores=[]), "usage.py", "exec"), namespace)  # noqa: S102 - Local callback definitions.
+    assert namespace["navigate"](0, 1, 1, None, None, [], 4, "demo.pdf", 1) == (2, 2)
+    context.triggered = [{"prop_id": '{"index":1,"type":"pdf-thumbnail"}.itemClickData'}]
+    clicks = [{"pageNumber": 1, "timestamp": 30}, {"pageNumber": 3, "timestamp": 40}]
+    assert namespace["navigate"](0, 0, 1, None, None, clicks, 4, "demo.pdf", 1) == (3, 3)
+    context.triggered_id = "pdf-zoom-in"
+    assert namespace["zoom"](0, 1, 0, "1", 520) == "1.25"
+    assert namespace["status"](4, None, None, 1) == ("/ 4", 4, False, True, False, False)
 
 
 def test_react_pdf_component_tree_properties():
