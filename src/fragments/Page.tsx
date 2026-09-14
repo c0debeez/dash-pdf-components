@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import type { PDFPageProxy } from "pdfjs-dist";
+import { fitPageWidth } from "./viewer";
 import { Page as ReactPDFPage } from "react-pdf";
 import type { PageProps } from "props/Page";
 import { DashContainer, errorData, pageData } from "./shared";
@@ -10,7 +12,6 @@ const Page = ({
   devicePixelRatio,
   height,
   imageResourcesPath,
-  loading,
   error,
   noData,
   pageColors,
@@ -24,13 +25,31 @@ const Page = ({
   scale = 1,
   width,
   loadData: _loadData,
+  pageData: _pageData,
   renderData: _renderData,
   errorData: _errorData,
   annotationsData: _annotationsData,
   textData: _textData,
   setProps,
+  fit,
+  fitSize,
   ...baseProps
-}: PageProps) => {
+}: PageProps & {
+  fit?: "width" | "page";
+  fitSize?: { width: number; height: number };
+}) => {
+  const [loadedPage, setLoadedPage] = useState<PDFPageProxy | null>(null);
+  const viewport = loadedPage?.getViewport({
+    scale: 1,
+    rotation: rotate ?? loadedPage.rotate,
+  });
+  const fittedWidth = fitPageWidth(
+    fit,
+    fitSize?.width ?? 0,
+    fitSize?.height ?? 0,
+    viewport?.width ?? 0,
+    viewport?.height ?? 0,
+  );
   const navigation = useContext(PDFNavigationContext);
   const pageElement = useRef<HTMLDivElement | null>(null);
   const registrationKey = useRef(Symbol("pdf-page"));
@@ -52,9 +71,9 @@ const Page = ({
         inputRef={pageElement}
         canvasBackground={canvasBackground}
         devicePixelRatio={devicePixelRatio}
-        height={height}
+        height={fit ? undefined : height}
         imageResourcesPath={imageResourcesPath}
-        loading={loading}
+        loading={null}
         error={error}
         noData={noData}
         pageColors={pageColors}
@@ -66,10 +85,15 @@ const Page = ({
         renderTextLayer={renderTextLayer}
         rotate={rotate}
         scale={scale}
-        width={width}
-        onLoadSuccess={(value) =>
-          setProps?.({ loadData: pageData(value), errorData: null })
-        }
+        width={fit ? fittedWidth : width}
+        onLoadSuccess={(value) => {
+          setLoadedPage(value);
+          setProps?.({
+            loadData: pageData(value),
+            pageData: pageData(value),
+            errorData: null,
+          });
+        }}
         onLoadError={(value) =>
           setProps?.({ errorData: errorData("page-load", value) })
         }
@@ -81,7 +105,11 @@ const Page = ({
         }
         onGetAnnotationsSuccess={(items) =>
           setProps?.({
-            annotationsData: { layer: "annotations", count: items.length },
+            annotationsData: {
+              pageNumber: effectivePageNumber,
+              layer: "annotations",
+              count: items.length,
+            },
           })
         }
         onGetAnnotationsError={(value) =>
@@ -91,7 +119,13 @@ const Page = ({
           setProps?.({ errorData: errorData("annotations-render", value) })
         }
         onGetTextSuccess={(value) =>
-          setProps?.({ textData: { layer: "text", count: value.items.length } })
+          setProps?.({
+            textData: {
+              pageNumber: effectivePageNumber,
+              layer: "text",
+              count: value.items.length,
+            },
+          })
         }
         onGetTextError={(value) =>
           setProps?.({ errorData: errorData("text-load", value) })

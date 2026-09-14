@@ -106,13 +106,21 @@ export const DashContainer = ({
   className,
   style,
   loading_state,
+  containerRef,
+  onScroll,
   setProps: _setProps,
   ...attributes
-}: DashBaseProps & { children: React.ReactNode }) => {
+}: DashBaseProps & {
+  children: React.ReactNode;
+  containerRef?: React.Ref<HTMLDivElement>;
+  onScroll?: React.UIEventHandler<HTMLDivElement>;
+}) => {
   const loading = getLoadingState(loading_state);
 
   return (
     <div
+      ref={containerRef}
+      onScroll={onScroll}
       {...attributes}
       id={id}
       className={className}

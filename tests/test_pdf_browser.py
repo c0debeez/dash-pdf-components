@@ -1,5 +1,6 @@
 import pytest
 from dash import Dash, Input, Output, ctx, html
+from selenium.webdriver.support.ui import WebDriverWait
 
 import dash_pdf_components as dpc
 
@@ -100,6 +101,71 @@ def test_pdf_viewer_internal_link_updates_rendered_page(dash_duo):
     dash_duo.start_server(app)
     dash_duo.wait_for_element('#viewer [data-page-number="1"] .annotationLayer a', timeout=30).click()
     dash_duo.wait_for_element('#viewer [data-page-number="2"]', timeout=30)
+    assert dash_duo.get_logs() == []
+
+
+@pytest.mark.browser
+def test_continuous_viewer_navigation_and_fit(dash_duo):
+    app = Dash(__name__)
+    app.layout = html.Div(
+        [
+            dpc.PDF(
+                id="viewer",
+                file={"data": list(_internal_link_pdf())},
+                pages="all",
+                fit="width",
+                style={"width": 320, "height": 220},
+            ),
+            html.Button("First page", id="first"),
+            html.Div(id="current"),
+        ]
+    )
+
+    @app.callback(Output("current", "children"), Input("viewer", "pageNumber"))
+    def current_page(number):
+        return str(number or 1)
+
+    @app.callback(Output("viewer", "pageNumber"), Input("first", "n_clicks"), prevent_initial_call=True)
+    def first_page(_clicks):
+        return 1
+
+    dash_duo.start_server(app)
+    dash_duo.wait_for_element('#viewer [data-page-number="2"] canvas', timeout=30)
+    WebDriverWait(dash_duo.driver, 10).until(
+        lambda driver: driver.execute_script(
+            'return document.querySelector("#viewer canvas").getBoundingClientRect().width > 300;'
+        )
+    )
+    dash_duo.wait_for_element('#viewer [data-page-number="1"] .annotationLayer a').click()
+    dash_duo.wait_for_text_to_equal("#current", "2")
+    WebDriverWait(dash_duo.driver, 10).until(
+        lambda driver: driver.execute_script('return document.getElementById("viewer").scrollTop > 100;')
+    )
+    assert len(dash_duo.find_elements("#viewer canvas")) == 2
+    dash_duo.find_element("#first").click()
+    dash_duo.wait_for_text_to_equal("#current", "1")
+    WebDriverWait(dash_duo.driver, 10).until(lambda driver: driver.execute_script('return document.getElementById("viewer").scrollTop < 5;'))
+    assert dash_duo.get_logs() == []
+
+
+@pytest.mark.browser
+def test_selected_pages_do_not_navigate_outside_selection(dash_duo):
+    app = Dash(__name__)
+    app.layout = html.Div(
+        [
+            dpc.PDF(id="viewer", file={"data": list(_internal_link_pdf())}, pages=[1], width=200),
+            html.Div(id="destination"),
+        ]
+    )
+
+    @app.callback(Output("destination", "children"), Input("viewer", "itemClickData"))
+    def destination(data):
+        return str(data["pageNumber"]) if data else ""
+
+    dash_duo.start_server(app)
+    dash_duo.wait_for_element('#viewer [data-page-number="1"] .annotationLayer a', timeout=30).click()
+    dash_duo.wait_for_text_to_equal("#destination", "2")
+    assert dash_duo.find_elements('#viewer [data-page-number="2"]') == []
     assert dash_duo.get_logs() == []
 
 

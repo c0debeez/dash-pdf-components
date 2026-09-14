@@ -1,4 +1,4 @@
-"""PDF reader demo. Prefer Ant Design when installed; set PDF_UI to override."""
+"""PDF demos. Set PDF_DEMO=basic for rendering only, or PDF_UI for reader controls."""
 
 import base64
 import os
@@ -6,7 +6,7 @@ from importlib.util import find_spec
 from pathlib import Path
 from uuid import uuid4
 
-from dash import ALL, ClientsideFunction, Dash, Input, Output, State, ctx, dcc, html, no_update
+from dash import ALL, ClientsideFunction, Dash, Input, Output, State, ctx, dcc, get_asset_url, html, no_update
 
 import dash_pdf_components as dpc
 
@@ -26,17 +26,26 @@ def select_ui():
     )
 
 
-UI = select_ui()
+UI = None if os.environ.get("PDF_DEMO", "reader").lower() == "basic" else select_ui()
 
 ASSETS = Path(__file__).resolve().parent / "assets"
 # Don Quijote example from https://react-pdf.org/playground (Page wrapping).
-PDF_URL = "/assets/documents/quixote.pdf"
-ENCRYPTED_PDF_URL = "/assets/documents/quixote-encrypted.pdf"
+PDF_ASSET = "documents/quixote.pdf"
+ENCRYPTED_PDF_ASSET = "documents/quixote-encrypted.pdf"
 PAGE_COUNT = 4
 PAGE_WIDTH = 600
 ZOOM_PRESETS = (0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4)
 ZOOM_OPTIONS = [{"label": f"{int(value * 100)}%", "value": str(value)} for value in ZOOM_PRESETS]
 ZOOM_OPTIONS.append({"label": "Fit width", "value": "fit"})
+
+
+def basic_usage():
+    return dpc.PDF(
+        file=get_asset_url(PDF_ASSET),
+        pages="all",
+        fit="width",
+        style={"height": "85vh", "maxWidth": 800, "margin": "24px auto"},
+    )
 
 
 def stores():
@@ -48,6 +57,7 @@ def stores():
 
 
 def document(error):
+    # Share one document between the outline, thumbnails, and independently controlled pages.
     return dpc.Document(
         html.Div(
             [
@@ -66,8 +76,7 @@ def document(error):
             className="pdf-reader",
         ),
         id="pdf-document",
-        file=PDF_URL,
-        loading="",
+        file=get_asset_url(PDF_ASSET),
         error=error,
         style={"minHeight": 480, "width": "100%"},
     )
@@ -91,7 +100,6 @@ def render_pages(page, num_pages, mode, scale, rotation_clicks, viewport_width):
             scale=1 if scale == "fit" else float(scale or 1),
             rotate=((rotation_clicks or 0) * 90) % 360,
             renderForms=True,
-            loading="",
             error=html.Div("Unable to load page", role="alert"),
             className="pdf-page",
         )
@@ -103,7 +111,7 @@ def render_thumbnails(num_pages):
     return [
         html.Div(
             [
-                dpc.Thumbnail(id={"type": "pdf-thumbnail", "index": number}, pageNumber=number, width=130, loading=""),
+                dpc.Thumbnail(id={"type": "pdf-thumbnail", "index": number}, pageNumber=number, width=130),
                 html.Div(f"Page {number}"),
             ],
             className="pdf-thumbnail",
@@ -128,8 +136,8 @@ def update_document(contents, _reset_clicks, _encrypted_clicks, _unlock_clicks, 
     if ctx.triggered_id == "pdf-unlock":
         return no_update, password or "", ""
     if ctx.triggered_id == "pdf-encrypted":
-        return ENCRYPTED_PDF_URL, "", ""
-    return (contents if ctx.triggered_id == "pdf-upload" and contents else PDF_URL), "", ""
+        return get_asset_url(ENCRYPTED_PDF_ASSET), "", ""
+    return (contents if ctx.triggered_id == "pdf-upload" and contents else get_asset_url(PDF_ASSET)), "", ""
 
 
 def download_pdf(_n_clicks, file, filename):
@@ -137,7 +145,7 @@ def download_pdf(_n_clicks, file, filename):
         return dcc.send_bytes(
             base64.b64decode(file.split(",", 1)[1]), Path(filename or "document.pdf").name, type="application/pdf"
         )
-    name = "quixote-encrypted.pdf" if file == ENCRYPTED_PDF_URL else "quixote.pdf"
+    name = "quixote-encrypted.pdf" if file == get_asset_url(ENCRYPTED_PDF_ASSET) else "quixote.pdf"
     return dcc.send_file(str(ASSETS / "documents" / name), type="application/pdf")
 
 
@@ -340,7 +348,7 @@ if UI == "antd":
         return calculate_progress(progress, num_pages, error)
 
 
-else:
+elif UI == "mantine":
     import dash_mantine_components as dmc
     from dash_iconify import DashIconify
 
@@ -465,6 +473,11 @@ else:
     def show_progress(progress, num_pages, error):
         percent, status = calculate_progress(progress, num_pages, error)
         return percent, {"exception": "red", "success": "teal", "active": "blue"}[status], f"{percent}%"
+
+
+else:
+    app = Dash(__name__, assets_folder=str(ASSETS))
+    app.layout = basic_usage()
 
 
 if __name__ == "__main__":

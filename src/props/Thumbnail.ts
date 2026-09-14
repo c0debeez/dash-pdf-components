@@ -29,6 +29,8 @@ export interface ThumbnailProps extends PDFDashBaseProps {
   width?: number;
   /** Latest loaded page dimensions. Read-only. */
   loadData?: PDFPageData | null;
+  /** Latest loaded thumbnail dimensions. Read-only. loadData is a deprecated alias. */
+  pageData?: PDFPageData | null;
   /** Latest rendered page dimensions. Read-only. */
   renderData?: PDFPageData | null;
   /** Latest thumbnail error. Read-only. */

@@ -7,6 +7,8 @@ import type {
 } from "props/shared/pdf";
 
 export interface PDFLayerData {
+  /** One-based page number associated with this result. */
+  pageNumber: number;
   /** Layer that finished loading or rendering. */
   layer: "annotations" | "text";
   /** Number of loaded items when available. */
@@ -46,6 +48,8 @@ export interface PageProps extends PDFDashBaseProps {
   width?: number;
   /** Latest loaded page dimensions. Read-only. */
   loadData?: PDFPageData | null;
+  /** Latest loaded page dimensions. Read-only. loadData is a deprecated alias. */
+  pageData?: PDFPageData | null;
   /** Latest rendered page dimensions. Read-only. */
   renderData?: PDFPageData | null;
   /** Latest page or layer error. Read-only. */

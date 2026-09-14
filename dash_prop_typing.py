@@ -36,6 +36,7 @@ custom_props = {
     },
     "PDF": {
         "file": _static_type("typing.Union[str, PDFUrlType, PDFDataType]"),
+        "pages": _static_type('typing.Union[Literal["all"], typing.Sequence[int]]'),
     },
     "Outline": {
         "outlineData": _static_type("typing.Sequence[PDFOutlineItemType]"),

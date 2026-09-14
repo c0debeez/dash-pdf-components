@@ -73,8 +73,6 @@ export interface PDFDocumentOptions {
 }
 
 export interface PDFDashBaseProps extends DashBaseProps {
-  /** Content displayed while the React-PDF component is loading. */
-  loading?: React.ReactNode;
   /** Content displayed when the React-PDF component fails. */
   error?: React.ReactNode;
   /** Content displayed when no document or page is provided. */

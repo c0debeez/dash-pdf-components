@@ -15,14 +15,18 @@ import type {
   PDFPageData,
 } from "props/shared/pdf";
 
-/** Props for the common single-page PDF viewer. */
+/** Props for the single-page or continuous PDF viewer. */
 export interface PDFProps extends PDFDashBaseProps {
   /** Additional content rendered inside the page. */
   children?: React.ReactNode;
   /** PDF source: URL, base64 data URI, or an object containing url or byte-array data. null clears the viewer. */
   file?: string | PDFFile | null;
-  /** One-based current page number. Defaults to 1 and updates when an internal PDF link is followed. */
-  pageNumber?: number;
+  /** One-based current page. Defaults to 1. Updates on navigation and continuous-reading scroll. all is deprecated; use pages=all. */
+  pageNumber?: number | "all";
+  /** Pages to render. Omit for the current page, use all for continuous reading, or provide unique one-based page numbers. pageNumber=all is deprecated; use pages=all instead. */
+  pages?: "all" | number[];
+  /** Fit pages to the container width or both width and height. Overrides width and height; scale remains a multiplier. page requires a container with an explicit height. */
+  fit?: "width" | "page";
   /** Page width. */
   width?: number;
   /** Page height. Ignored when width is provided. */
@@ -81,6 +85,4 @@ export interface PDFProps extends PDFDashBaseProps {
   annotationsData?: PDFLayerData | null;
   /** Latest text-layer result. Read-only. */
   textData?: PDFLayerData | null;
-  /** Content displayed while React-PDF is loading. Defaults to the current Dash loading state when omitted. */
-  loading?: React.ReactNode;
 }

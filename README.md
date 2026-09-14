@@ -10,16 +10,41 @@ For the common single-page viewer, use `PDF`:
 
 ```python
 import dash_pdf_components as dpc
+from dash import get_asset_url
 
 dpc.PDF(
     id="pdf",
-    file="/assets/document.pdf",
+    file=get_asset_url("document.pdf"),
     pageNumber=1,
     width=720,
 )
 ```
 
-`PDF` combines document loading and one rendered page. Navigation controls can update `PDF.pageNumber`, `PDF.scale`, and `PDF.rotate`; callbacks can read `PDF.numPages`, `PDF.loadProgress`, `PDF.pageData`, `PDF.renderData`, and `PDF.errorData` from the same component.
+`PDF` combines document loading and page rendering. Navigation controls can update `PDF.pageNumber`, `PDF.scale`, and `PDF.rotate`; callbacks can read `PDF.numPages`, `PDF.documentData`, `PDF.loadProgress`, `PDF.pageData`, `PDF.renderData`, and `PDF.errorData` from the same component.
+
+Render every page without a page-generation callback:
+
+```python
+dpc.PDF(
+    file=get_asset_url("document.pdf"),
+    pages="all",
+    fit="width",
+    style={"height": "70vh"},
+)
+```
+
+`pageNumber` controls the current page; `pages` controls which pages are mounted.
+Omit `pages` for single-page reading, use `"all"` for continuous reading, or a
+list such as `[1, 3, 5]` for selected pages. Lists preserve order; duplicates and
+invalid or out-of-range page numbers are ignored. In continuous reading,
+navigation scrolls to the destination and scrolling updates `pageNumber`.
+Links to pages outside an explicit selection only emit `itemClickData`, without
+changing the selection. `pageNumber="all"` remains supported but is deprecated.
+
+`fit="width"` sizes each page to the container's available width;
+`fit="page"` fits both dimensions and requires an explicit container height.
+These modes respond to resizing and rotation and override `width` and `height`.
+`scale` multiplies the fitted size, so zooming may introduce scrollbars.
 
 ## API
 
@@ -33,7 +58,18 @@ Use the smallest API that fits the layout:
 | `Thumbnail` | Clickable page preview inside `Document` |
 | `Outline` | PDF table of contents inside `Document` |
 
-`PDF` accepts the commonly used React-PDF options directly: `file`, `pageNumber`, `width`, `height`, `scale`, `rotate`, `renderTextLayer`, `renderAnnotationLayer`, `renderForms`, `loading`, `error`, and `noData`. Advanced PDF.js loading options remain available through `options`, `assetBaseUrl`, and `workerSrc`.
+`PDF` accepts the commonly used React-PDF options directly: `file`, `pageNumber`, `width`, `height`, `scale`, `rotate`, `renderTextLayer`, `renderAnnotationLayer`, `renderForms`, `error`, and `noData`. Advanced PDF.js loading options remain available through `options`, `assetBaseUrl`, and `workerSrc`.
+
+`Document.documentData`, `Page.pageData`, and `Thumbnail.pageData` are the
+recommended names for loaded results. Their existing `loadData` aliases remain
+available for compatibility. Page and layer results identify their `pageNumber`
+and describe the latest event, not a collection of every rendered page.
+
+All components expose Dash's loading state through `data-dash-is-loading`, so
+`dcc.Loading` can manage callback loading consistently. React-PDF's built-in
+loading messages are disabled; no `loading` property is needed. PDF resource
+fetching is separate from Dash callback loading and can be monitored through
+`loadProgress` and `numPages` when an application needs its own indicator.
 
 Use the composable API only when the layout needs multiple pages, thumbnails, or an outline:
 
@@ -53,7 +89,15 @@ The package intentionally has no toolbar, theme system, locale system, or Ant De
 
 ## Reader demo
 
-The demo includes PDF upload, an encrypted document (password: `dash-pdf`), page navigation, zoom, rotation, download, bookmarks, thumbnails, and single-page or continuous reading. It uses Ant Design when `dash-antd-components` is installed, otherwise Mantine when `dash-mantine-components` is installed. These UI libraries are optional and are not package dependencies.
+Run a rendering-only demo without installing a UI library:
+
+```bash
+PDF_DEMO=basic python usage.py
+```
+
+This uses `PDF(pages="all", fit="width")` and has no toolbar or application callbacks.
+
+The default reader demo includes PDF upload, an encrypted document (password: `dash-pdf`), page navigation, zoom, rotation, download, bookmarks, thumbnails, and single-page or continuous reading. It uses Ant Design when `dash-antd-components` is installed, otherwise Mantine when `dash-mantine-components` is installed. These UI libraries are optional and are not package dependencies. Its advanced layout keeps `Document + Page + Outline + Thumbnail` so every view shares the same loaded PDF.
 
 Install either UI library and run the demo:
 

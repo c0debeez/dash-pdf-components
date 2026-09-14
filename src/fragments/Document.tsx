@@ -27,17 +27,18 @@ const Document = ({
   password,
   numPages: _numPages,
   loadData: _loadData,
+  documentData: _documentData,
   loadProgress: _loadProgress,
   sourceLoaded: _sourceLoaded,
   errorData: _errorData,
   passwordData: _passwordData,
   itemClickData: _itemClickData,
-  loading,
   error,
   noData,
   setProps,
+  navigate,
   ...baseProps
-}: DocumentProps) => {
+}: DocumentProps & { navigate?: (pageNumber: number) => void }) => {
   const stableFile = useStableValue(file);
   const stableOptions = useStableValue(options);
   const documentOptions = useMemo(
@@ -66,6 +67,7 @@ const Document = ({
     setProps?.({
       numPages: null,
       loadData: null,
+      documentData: null,
       loadProgress: null,
       sourceLoaded: false,
       errorData: null,
@@ -79,6 +81,10 @@ const Document = ({
     setProps?.({
       numPages: pdf.numPages,
       loadData: { numPages: pdf.numPages, fingerprints: [...pdf.fingerprints] },
+      documentData: {
+        numPages: pdf.numPages,
+        fingerprints: [...pdf.fingerprints],
+      },
       errorData: null,
       passwordData: null,
     });
@@ -93,7 +99,8 @@ const Document = ({
     const pages = [...registeredPages.current.values()];
     const targetPage = pages.find((page) => page.pageNumber === pageNumber);
 
-    if (targetPage) targetPage.scrollIntoView();
+    if (navigate) navigate(pageNumber);
+    else if (targetPage) targetPage.scrollIntoView();
     else if (pages.length === 1) pages[0].setPageNumber(pageNumber);
 
     setProps?.({ itemClickData: itemClickData(pageIndex, pageNumber) });
@@ -113,7 +120,7 @@ const Document = ({
           renderMode={renderMode}
           rotate={rotate}
           scale={scale}
-          loading={loading}
+          loading={null}
           error={error}
           noData={noData}
           onItemClick={onItemClick}

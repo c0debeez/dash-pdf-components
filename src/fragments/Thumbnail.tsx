@@ -6,7 +6,6 @@ const Thumbnail = ({
   canvasBackground,
   devicePixelRatio,
   height,
-  loading,
   error,
   noData,
   pageColors,
@@ -17,6 +16,7 @@ const Thumbnail = ({
   scale = 1,
   width,
   loadData: _loadData,
+  pageData: _pageData,
   renderData: _renderData,
   errorData: _errorData,
   itemClickData: _itemClickData,
@@ -28,7 +28,7 @@ const Thumbnail = ({
       canvasBackground={canvasBackground}
       devicePixelRatio={devicePixelRatio}
       height={height}
-      loading={loading}
+      loading={null}
       error={error}
       noData={noData}
       pageColors={pageColors}
@@ -42,7 +42,11 @@ const Thumbnail = ({
         setProps?.({ itemClickData: itemClickData(pageIndex, pageNumber) })
       }
       onLoadSuccess={(value) =>
-        setProps?.({ loadData: pageData(value), errorData: null })
+        setProps?.({
+          loadData: pageData(value),
+          pageData: pageData(value),
+          errorData: null,
+        })
       }
       onLoadError={(value) =>
         setProps?.({ errorData: errorData("thumbnail-load", value) })

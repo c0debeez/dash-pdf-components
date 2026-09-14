@@ -55,6 +55,8 @@ export interface DocumentProps extends PDFDashBaseProps {
   numPages?: number | null;
   /** Loaded document metadata. Read-only. */
   loadData?: DocumentLoadData | null;
+  /** Loaded document information. Read-only. loadData is a deprecated alias. */
+  documentData?: DocumentLoadData | null;
   /** Latest loading progress. Read-only. */
   loadProgress?: DocumentProgressData | null;
   /** Whether React-PDF retrieved the current source. Read-only. */
