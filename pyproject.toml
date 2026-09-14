@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dash-pdf-components"
-version = "0.1.0"
+version = "0.1.1"
 description = "React-PDF rendering components for Plotly Dash"
 authors = [{ name = "C0deBeez", email = "ethan.zhang2016@gmail.com" }]
 readme = "README.md"

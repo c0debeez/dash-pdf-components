@@ -1,6 +1,6 @@
 {
   "name": "dash-pdf-components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React-PDF rendering components for Plotly Dash",
   "main": "dash_pdf_components/dash_pdf_components.js",
   "unpkg": "dash_pdf_components/dash_pdf_components.js",
