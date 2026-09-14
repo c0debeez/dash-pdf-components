@@ -29,9 +29,10 @@ def select_ui():
 UI = select_ui()
 
 ASSETS = Path(__file__).resolve().parent / "assets"
-PDF_URL = "/assets/documents/demo.pdf"
-ENCRYPTED_PDF_URL = "/assets/documents/demo-encrypted.pdf"
-PAGE_COUNT = 3
+# Don Quijote example from https://react-pdf.org/playground (Page wrapping).
+PDF_URL = "/assets/documents/quixote.pdf"
+ENCRYPTED_PDF_URL = "/assets/documents/quixote-encrypted.pdf"
+PAGE_COUNT = 4
 PAGE_WIDTH = 600
 ZOOM_PRESETS = (0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4)
 ZOOM_OPTIONS = [{"label": f"{int(value * 100)}%", "value": str(value)} for value in ZOOM_PRESETS]
@@ -136,7 +137,7 @@ def download_pdf(_n_clicks, file, filename):
         return dcc.send_bytes(
             base64.b64decode(file.split(",", 1)[1]), Path(filename or "document.pdf").name, type="application/pdf"
         )
-    name = "demo-encrypted.pdf" if file == ENCRYPTED_PDF_URL else "demo.pdf"
+    name = "quixote-encrypted.pdf" if file == ENCRYPTED_PDF_URL else "quixote.pdf"
     return dcc.send_file(str(ASSETS / "documents" / name), type="application/pdf")
 
 

@@ -93,7 +93,7 @@
 
         status(numPages, error, challenge, page) {
             const ready = Boolean(numPages);
-            return ["/ " + (numPages || "-"), numPages || 3, !ready && !error && !challenge,
+            return ["/ " + (numPages || "-"), numPages || 4, !ready && !error && !challenge,
                 !ready || page <= 1, !ready || page >= numPages, !ready];
         },
     };
