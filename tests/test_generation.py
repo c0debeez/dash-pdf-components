@@ -26,6 +26,7 @@ def test_generation_properties_and_descriptor_tree():
 @pytest.mark.parametrize("mode", ["blob", "viewer", "download"])
 def test_generated_pdf_and_lazy_modules(browser, mode):
     app = Dash(__name__, requests_pathname_prefix="/pdf/", routes_pathname_prefix="/pdf/")
+    app.enable_dev_tools(dev_tools_ui=True, dev_tools_props_check=True, dev_tools_hot_reload=False)
     app.layout = html.Div(
         [
             dpc.PDF(

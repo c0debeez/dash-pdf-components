@@ -67,7 +67,24 @@ export interface PDFProps extends PDFDashBaseProps {
   /** Read-only generated font family diagnostics. */
   fontFamilies?: string[];
   /** Read-only JSON-safe generated font diagnostics. */
-  fontInfo?: Record<string, unknown>;
+  fontInfo?: {
+    sources?: Record<
+      string,
+      {
+        src?: any;
+        fontStyle?: string;
+        fontWeight?: number | string;
+        loaded?: boolean;
+      }[]
+    >;
+    selected?: {
+      fontFamily?: string;
+      src?: any;
+      fontStyle?: string;
+      fontWeight?: number | string;
+      loaded?: boolean;
+    }[];
+  };
   /** Additional content rendered inside the page. */
   children?: React.ReactNode;
   /** PDF source: URL, base64 data URI, or an object containing url or byte-array data. null clears the viewer. */
