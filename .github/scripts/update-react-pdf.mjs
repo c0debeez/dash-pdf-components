@@ -3,21 +3,27 @@ import { appendFileSync, readFileSync } from "node:fs";
 
 const readJson = (path) => JSON.parse(readFileSync(path, "utf8"));
 const current = readJson("node_modules/react-pdf/package.json");
-const latest = JSON.parse(
+// Dash currently ships React 18. React-PDF 11 requires React 19, so stay on 10.x.
+const releases = JSON.parse(
   execFileSync(
     "npm",
-    [
-      "view",
-      "react-pdf@latest",
-      "version",
-      "dependencies.pdfjs-dist",
-      "--json",
-    ],
+    ["view", "react-pdf@10", "version", "dependencies.pdfjs-dist", "--json"],
     {
       encoding: "utf8",
     },
   ),
 );
+const latest = (Array.isArray(releases) ? releases : [releases])
+  .filter((release) => /^10\.\d+\.\d+$/.test(release.version))
+  .sort((a, b) => {
+    const left = a.version.split(".").map(Number);
+    const right = b.version.split(".").map(Number);
+    return left[1] - right[1] || left[2] - right[2];
+  })
+  .at(-1);
+if (!latest) {
+  throw new Error("No stable React 18-compatible React-PDF 10 release found.");
+}
 const version = latest.version;
 const pdfjsVersion = latest["dependencies.pdfjs-dist"];
 // React-PDF pins PDF.js exactly; reject ranges rather than selecting an incompatible Worker.

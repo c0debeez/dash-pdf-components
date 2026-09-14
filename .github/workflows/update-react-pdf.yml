@@ -49,12 +49,22 @@ jobs:
           uv sync --frozen
           echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
 
+      - name: Set up Chrome and ChromeDriver
+        if: steps.update.outputs.changed == 'true'
+        id: chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: stable
+          install-chromedriver: true
+
       - name: Validate updated dependencies
         if: steps.update.outputs.changed == 'true'
+        env:
+          DASH_TEST_CHROMEPATH: ${{ steps.chrome.outputs.chrome-path }}
         run: |
           pnpm exec tsc --noEmit
           pnpm run build
-          uv run --frozen pytest -q -m 'not browser'
+          uv run --frozen pytest -q --headless
 
       - name: Create or update dependency PR
         if: steps.update.outputs.changed == 'true'
@@ -76,6 +86,6 @@ jobs:
             Validation completed in this workflow:
             - TypeScript type checking
             - Component generation and production build
-            - Python tests excluding browser tests
+            - Python tests including browser rendering and navigation tests
 
             Review upstream release notes and compatibility before merging. This PR is not automatically merged.
