@@ -1,10 +1,11 @@
 import type React from "react";
+import type { FunctionProps } from "./generation/shared/dash";
 import type {
   DocumentLoadData,
   DocumentPasswordData,
   DocumentProgressData,
-} from "props/Document";
-import type { PDFLayerData } from "props/Page";
+} from "props/DocumentView";
+import type { PDFLayerData } from "props/PageView";
 import type {
   PDFDashBaseProps,
   PDFDocumentOptions,
@@ -17,6 +18,56 @@ import type {
 
 /** Props for the single-page or continuous PDF viewer. */
 export interface PDFProps extends PDFDashBaseProps {
+  /** Document description to generate. Mutually exclusive with file. */
+  document?: React.ReactNode;
+  /** Output presentation. viewer previews, download renders a link, blob only generates. Defaults to viewer. */
+  mode?: "viewer" | "download" | "blob";
+  /** Preview engine. pdfjs is the default; native uses the browser iframe and lacks page callbacks. */
+  previewMode?: "pdfjs" | "native";
+  /** Download filename. Defaults to document.pdf. */
+  fileName?: string;
+  /** Include a basic download link in viewer mode. Defaults to false. */
+  showDownload?: boolean;
+  /** Download link text. Defaults to Download PDF. */
+  downloadLabel?: string;
+  /** Browser-native toolbar hint. Custom reader controls belong to AIO. */
+  showToolbar?: boolean;
+  /** Stable native preview iframe ID. */
+  frameId?: string;
+  /** Generate whenever document or font configuration changes. Defaults to true. */
+  autoGenerate?: boolean;
+  /** Change this counter to request manual generation. */
+  n_generate?: number;
+  /** Read-only latest successful generation count. Page drawing does not increment it. */
+  n_render?: number;
+  /** Read-only download click count. */
+  n_clicks?: number;
+  /** Read-only generation activity, separate from Dash callback loading. */
+  generating?: boolean;
+  /** Read-only generated Blob URL. Valid only in this browser until replacement or unmount. */
+  url?: string | null;
+  /** Read-only generated PDF size in bytes. */
+  size?: number;
+  /** Enable Base64 export of the generated PDF. Defaults to false. */
+  returnBase64?: boolean;
+  /** Read-only generated Base64 when returnBase64 is enabled. */
+  data?: string | null;
+  /** Read-only generator version. */
+  rendererVersion?: string;
+  /** Font registrations used during generation. */
+  fonts?: Record<string, unknown>[];
+  /** Generation font action. clear removes global custom font registrations. */
+  fontAction?: "load" | "reset" | "clear";
+  /** Font descriptors used for generation diagnostics. */
+  fontDescriptors?: Record<string, unknown>[];
+  /** Emoji resource URL configuration or named builder reference. */
+  emojiSource?: Record<string, unknown>;
+  /** Named generation hyphenation function. */
+  hyphenationCallback?: FunctionProps;
+  /** Read-only generated font family diagnostics. */
+  fontFamilies?: string[];
+  /** Read-only JSON-safe generated font diagnostics. */
+  fontInfo?: Record<string, unknown>;
   /** Additional content rendered inside the page. */
   children?: React.ReactNode;
   /** PDF source: URL, base64 data URI, or an object containing url or byte-array data. null clears the viewer. */

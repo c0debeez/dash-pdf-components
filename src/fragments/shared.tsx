@@ -21,6 +21,7 @@ const deepEqual = (left: unknown, right: unknown): boolean => {
   if (Object.is(left, right)) return true;
   if (!left || !right || typeof left !== "object" || typeof right !== "object")
     return false;
+  if (left instanceof Blob || right instanceof Blob) return false;
   if (Array.isArray(left) || Array.isArray(right)) {
     return (
       Array.isArray(left) &&

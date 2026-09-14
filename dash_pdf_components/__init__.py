@@ -8,6 +8,7 @@ import dash as _dash
 
 from ._imports_ import *
 from ._imports_ import __all__
+from ._typing import PDFStyle, PDFStyleInput, SVGPresentationAttributes, CSSStyle, FunctionProps, Bookmark, Permissions, FontRegistration, FontDescriptor, ImageSource, PageSize, FormFormatting
 
 if not hasattr(_dash, "__plotly_dash") and not hasattr(_dash, "development"):
     print(
@@ -24,18 +25,18 @@ npm_package_name = _package["name"]
 package_name = __name__
 __version__ = _package["version"]
 
+_chunks = [__name__, *sorted(filename[:-3] for filename in _os.listdir(_basepath)
+    if filename.startswith("async-") and filename.endswith(".js"))]
 _js_dist = [
     {
-        "relative_package_path": f"{__name__}.js",
-        "external_url": f"https://unpkg.com/{npm_package_name}@{__version__}/{__name__}/{__name__}.js",
+        "relative_package_path": f"{chunk}.js",
+        "external_url": f"https://unpkg.com/{npm_package_name}@{__version__}/{__name__}/{chunk}.js",
         "namespace": package_name,
-    },
-    {
-        "dev_package_path": "proptypes.js",
-        "dev_only": True,
-        "namespace": package_name,
-    },
+        "async": "lazy" if chunk != __name__ else False,
+    }
+    for chunk in _chunks
 ]
+_js_dist.append({"dev_package_path": "proptypes.js", "dev_only": True, "namespace": package_name})
 
 _pdfjs_root = _os.path.join(_basepath, "pdfjs")
 if _os.path.isdir(_pdfjs_root):

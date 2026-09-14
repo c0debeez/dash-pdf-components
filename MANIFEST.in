@@ -1,6 +1,9 @@
-recursive-include dash_pdf_components *.js *.css *.json *.mjs *.bcmap *.pfb *.ttf *.otf *.wasm *.svg *.gif
+include README.md LICENSE usage.py dash_prop_typing.py package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.json webpack.config.js
+recursive-include dash_pdf_components *.py *.js *.css *.json *.icc *.mjs *.bcmap *.pfb *.ttf *.otf *.wasm *.svg *.gif
 recursive-exclude dash_pdf_components *.map
-prune tests
-include README.md
-include LICENSE
-include dash_pdf_components/package-info.json
+recursive-include src *.ts *.tsx *.css
+recursive-include scripts *.py *.cjs *.mjs
+recursive-include docs *.md *.json
+recursive-include tests *.py
+recursive-include examples *.py *.json *.tsx *.ts *.ttf *.jpg *.jpeg *.png *.svg *.md LICENSE
+recursive-include assets *.js *.ttf *.jpg *.jpeg *.png *.svg

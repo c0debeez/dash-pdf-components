@@ -1,0 +1,4740 @@
+{
+  "package": "@react-pdf/renderer",
+  "version": "4.9.0",
+  "components": {
+    "Document": {
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "title": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "author": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "subject": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "creator": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "keywords": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "producer": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "language": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "creationDate": {
+        "mode": "adapted",
+        "type": "string",
+        "required": false,
+        "note": "ISO 8601 string validated and converted to Date."
+      },
+      "modificationDate": {
+        "mode": "adapted",
+        "type": "string",
+        "required": false,
+        "note": "ISO 8601 string validated and converted to Date."
+      },
+      "pdfVersion": {
+        "mode": "direct",
+        "type": "\"1.3\" | \"1.4\" | \"1.5\" | \"1.6\" | \"1.7\" | \"1.7ext3\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "conformance": {
+        "mode": "direct",
+        "type": "\"PDF/A-1\" | \"PDF/A-1b\" | \"PDF/A-2\" | \"PDF/A-2b\" | \"PDF/A-3\" | \"PDF/A-3b\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "pageMode": {
+        "mode": "direct",
+        "type": "\"useNone\" | \"useOutlines\" | \"useThumbs\" | \"fullScreen\" | \"useOC\" | \"useAttachments\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "pageLayout": {
+        "mode": "direct",
+        "type": "\"singlePage\" | \"oneColumn\" | \"twoColumnLeft\" | \"twoColumnRight\" | \"twoPageLeft\" | \"twoPageRight\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "ownerPassword": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "userPassword": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "permissions": {
+        "mode": "direct",
+        "type": "Permissions",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "onRender": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "required": false,
+        "note": "Named registry function, original arguments followed by options and context."
+      }
+    },
+    "Page": {
+      "wrap": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "layout": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "required": false,
+        "note": "Named registry function, original arguments followed by options and context."
+      },
+      "experimentalPagination": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "debug": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "size": {
+        "mode": "direct",
+        "type": "string | (string | number)[] | { width: string | number; height?: string | number }",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "orientation": {
+        "mode": "direct",
+        "type": "\"portrait\" | \"landscape\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dpi": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "bookmark": {
+        "mode": "direct",
+        "type": "string | Bookmark",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "View": {
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "wrap": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "debug": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "render": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "required": false,
+        "note": "Named registry function, original arguments followed by options and context."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Text": {
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "wrap": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "debug": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "render": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "required": false,
+        "note": "Named registry function, original arguments followed by options and context."
+      },
+      "hyphenationCallback": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "required": false,
+        "note": "Named registry function, original arguments followed by options and context."
+      },
+      "hyphenationPenalty": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "orphans": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "widows": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "x": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "y": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Image": {
+      "debug": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "cache": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "srcSet": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "sizes": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "src": {
+        "mode": "adapted",
+        "type": "ImageSource | FunctionProps",
+        "required": true,
+        "note": "URL/data URL, request dictionary, {data: base64, format}, byte list or named (possibly async) source function."
+      },
+      "source": {
+        "mode": "adapted",
+        "type": "ImageSource | FunctionProps",
+        "required": true,
+        "note": "URL/data URL, request dictionary, {data: base64, format}, byte list or named (possibly async) source function."
+      },
+      "x": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "SVG image coordinate from the browser implementation; omitted from upstream ImageProps."
+      },
+      "y": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "SVG image coordinate from the browser implementation; omitted from upstream ImageProps."
+      }
+    },
+    "ImageBackground": {
+      "debug": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "cache": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "srcSet": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "sizes": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "imageStyle": {
+        "mode": "direct",
+        "type": "Record<string, any>",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "src": {
+        "mode": "adapted",
+        "type": "ImageSource | FunctionProps",
+        "required": true,
+        "note": "URL/data URL, request dictionary, {data: base64, format}, byte list or named (possibly async) source function."
+      },
+      "source": {
+        "mode": "adapted",
+        "type": "ImageSource | FunctionProps",
+        "required": true,
+        "note": "URL/data URL, request dictionary, {data: base64, format}, byte list or named (possibly async) source function."
+      }
+    },
+    "Link": {
+      "wrap": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "debug": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "href": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "src": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "hitSlop": {
+        "mode": "direct",
+        "type": "number | { \"top\"?: number; \"bottom\"?: number; \"left\"?: number; \"right\"?: number }",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Note": {
+      "children": {
+        "mode": "direct",
+        "type": "string",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Canvas": {
+      "debug": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "paint": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "required": true,
+        "note": "Named registry function, original arguments followed by options and context."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "FieldSet": {
+      "name": {
+        "mode": "direct",
+        "type": "string",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "TextInput": {
+      "align": {
+        "mode": "direct",
+        "type": "\"left\" | \"center\" | \"right\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "multiline": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "password": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "noSpell": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "format": {
+        "mode": "direct",
+        "type": "{ \"type\": \"number\" | \"date\" | \"time\" | \"percent\" | \"zip\" | \"zipPlus4\" | \"phone\" | \"ssn\"; \"param\"?: string; \"nDec\"?: number; \"sepComma\"?: boolean; \"negStyle\"?: \"MinusBlack\" | \"Red\" | \"ParensBlack\" | \"ParensRed\"; \"currency\"?: string; \"currencyPrepend\"?: boolean }",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fontSize": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "maxLength": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "name": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "required": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "noExport": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "readOnly": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "value": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "defaultValue": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Checkbox": {
+      "backgroundColor": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "borderColor": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "checked": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "onState": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "offState": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "xMark": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "name": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "required": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "noExport": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "readOnly": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "value": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "defaultValue": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Select": {
+      "sort": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "edit": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "multiSelect": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "noSpell": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "select": {
+        "mode": "direct",
+        "type": "(string)[]",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "name": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "required": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "noExport": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "readOnly": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "value": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "defaultValue": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "List": {
+      "sort": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "edit": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "multiSelect": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "noSpell": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "select": {
+        "mode": "direct",
+        "type": "(string)[]",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "name": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "required": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "noExport": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "readOnly": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "value": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "defaultValue": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Svg": {
+      "debug": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "width": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "height": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "viewBox": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "preserveAspectRatio": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fixed": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "break": {
+        "mode": "direct",
+        "type": "boolean",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "minPresenceAhead": {
+        "mode": "direct",
+        "type": "number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Line": {
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "x1": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "x2": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "y1": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "y2": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Polyline": {
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "points": {
+        "mode": "direct",
+        "type": "string",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Polygon": {
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "points": {
+        "mode": "direct",
+        "type": "string",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Path": {
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "d": {
+        "mode": "direct",
+        "type": "string",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Rect": {
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "x": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "y": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "width": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "height": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "rx": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "ry": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Circle": {
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "cx": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "cy": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "r": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Ellipse": {
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "cx": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "cy": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "rx": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "ry": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Tspan": {
+      "x": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "y": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "G": {
+      "style": {
+        "mode": "adapted",
+        "type": "PDFStyle | PDFStyle[]",
+        "required": false,
+        "note": "Typed PDF/SVG style dictionary or list; StyleSheet.create is represented by dictionaries."
+      },
+      "fill": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "stroke": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "transform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeDasharray": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "opacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fillRule": {
+        "mode": "direct",
+        "type": "\"nonzero\" | \"evenodd\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "textAnchor": {
+        "mode": "direct",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinecap": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "strokeLinejoin": {
+        "mode": "direct",
+        "type": "\"butt\" | \"round\" | \"square\" | \"miter\" | \"bevel\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "visibility": {
+        "mode": "direct",
+        "type": "\"visible\" | \"hidden\" | \"collapse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "clipPath": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerStart": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerMid": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerEnd": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "dominantBaseline": {
+        "mode": "direct",
+        "type": "\"middle\" | \"auto\" | \"central\" | \"hanging\" | \"mathematical\" | \"text-after-edge\" | \"text-before-edge\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Stop": {
+      "offset": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "stopColor": {
+        "mode": "direct",
+        "type": "string",
+        "required": true,
+        "note": "Same renderer property and semantics."
+      },
+      "stopOpacity": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "Defs": {},
+    "ClipPath": {
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": false,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      }
+    },
+    "Marker": {
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": true,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "viewBox": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "refX": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "refY": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerWidth": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerHeight": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "orient": {
+        "mode": "direct",
+        "type": "number | \"auto\" | \"auto-start-reverse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "markerUnits": {
+        "mode": "direct",
+        "type": "\"strokeWidth\" | \"userSpaceOnUse\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "LinearGradient": {
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": true,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "x1": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "x2": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "y1": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "y2": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "xlinkHref": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "gradientTransform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "gradientUnits": {
+        "mode": "direct",
+        "type": "\"userSpaceOnUse\" | \"objectBoundingBox\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "RadialGradient": {
+      "id": {
+        "mode": "adapted",
+        "type": "string | Record<string, any>",
+        "required": true,
+        "note": "Dash identity; string also defaults to PDF/SVG ID. pdfId overrides the PDF/SVG identity; object IDs never enter renderer."
+      },
+      "cx": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "cy": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "r": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fx": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "fy": {
+        "mode": "direct",
+        "type": "string | number",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "xlinkHref": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "gradientTransform": {
+        "mode": "direct",
+        "type": "string",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      },
+      "gradientUnits": {
+        "mode": "direct",
+        "type": "\"userSpaceOnUse\" | \"objectBoundingBox\"",
+        "required": false,
+        "note": "Same renderer property and semantics."
+      }
+    },
+    "PDFDownloadLink": {
+      "onClick": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "ref": {
+        "mode": "unsupported",
+        "note": "Ref/imperative DOM or raw HTML is not a serialized Dash property; use children."
+      },
+      "hidden": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Forwarded to the download anchor."
+      },
+      "download": {
+        "mode": "direct",
+        "type": "string | boolean",
+        "note": "Forwarded to the download anchor."
+      },
+      "hrefLang": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "media": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "ping": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "target": {
+        "mode": "direct",
+        "type": "\"_self\" | \"_blank\" | \"_parent\" | \"_top\" | string",
+        "note": "Forwarded to the download anchor."
+      },
+      "type": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "referrerPolicy": {
+        "mode": "direct",
+        "type": "\"\" | \"no-referrer\" | \"no-referrer-when-downgrade\" | \"origin\" | \"origin-when-cross-origin\" | \"same-origin\" | \"strict-origin\" | \"strict-origin-when-cross-origin\" | \"unsafe-url\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "defaultChecked": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Forwarded to the download anchor."
+      },
+      "defaultValue": {
+        "mode": "direct",
+        "type": "string | number | (string)[]",
+        "note": "Forwarded to the download anchor."
+      },
+      "suppressContentEditableWarning": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Forwarded to the download anchor."
+      },
+      "suppressHydrationWarning": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Forwarded to the download anchor."
+      },
+      "accessKey": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "autoCapitalize": {
+        "mode": "direct",
+        "type": "string | \"off\" | \"none\" | \"on\" | \"sentences\" | \"words\" | \"characters\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "autoFocus": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Forwarded to the download anchor."
+      },
+      "contentEditable": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\" | \"inherit\" | \"plaintext-only\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "contextMenu": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "dir": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "draggable": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "enterKeyHint": {
+        "mode": "direct",
+        "type": "\"enter\" | \"done\" | \"go\" | \"next\" | \"previous\" | \"search\" | \"send\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "lang": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "nonce": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "slot": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "spellCheck": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "tabIndex": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "title": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "translate": {
+        "mode": "direct",
+        "type": "\"yes\" | \"no\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "radioGroup": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "role": {
+        "mode": "direct",
+        "type": "string | \"none\" | \"search\" | \"alert\" | \"alertdialog\" | \"application\" | \"article\" | \"banner\" | \"button\" | \"cell\" | \"checkbox\" | \"columnheader\" | \"combobox\" | \"complementary\" | \"contentinfo\" | \"definition\" | \"dialog\" | \"directory\" | \"document\" | \"feed\" | \"figure\" | \"form\" | \"grid\" | \"gridcell\" | \"group\" | \"heading\" | \"img\" | \"link\" | \"list\" | \"listbox\" | \"listitem\" | \"log\" | \"main\" | \"marquee\" | \"math\" | \"menu\" | \"menubar\" | \"menuitem\" | \"menuitemcheckbox\" | \"menuitemradio\" | \"navigation\" | \"note\" | \"option\" | \"presentation\" | \"progressbar\" | \"radio\" | \"radiogroup\" | \"region\" | \"row\" | \"rowgroup\" | \"rowheader\" | \"scrollbar\" | \"searchbox\" | \"separator\" | \"slider\" | \"spinbutton\" | \"status\" | \"switch\" | \"tab\" | \"table\" | \"tablist\" | \"tabpanel\" | \"term\" | \"textbox\" | \"timer\" | \"toolbar\" | \"tooltip\" | \"tree\" | \"treegrid\" | \"treeitem\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "about": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "content": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "datatype": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "inlist": {
+        "mode": "direct",
+        "type": "any",
+        "note": "Forwarded to the download anchor."
+      },
+      "prefix": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "property": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "rel": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "resource": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "rev": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "typeof": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "vocab": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "autoCorrect": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "autoSave": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "color": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "itemProp": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "itemScope": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Forwarded to the download anchor."
+      },
+      "itemType": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "itemID": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "itemRef": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "results": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "security": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "unselectable": {
+        "mode": "direct",
+        "type": "\"off\" | \"on\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "popover": {
+        "mode": "direct",
+        "type": "\"\" | \"auto\" | \"manual\" | \"hint\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "popoverTargetAction": {
+        "mode": "direct",
+        "type": "\"toggle\" | \"show\" | \"hide\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "popoverTarget": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "inert": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Forwarded to the download anchor."
+      },
+      "inputMode": {
+        "mode": "direct",
+        "type": "\"none\" | \"search\" | \"text\" | \"tel\" | \"url\" | \"email\" | \"numeric\" | \"decimal\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "is": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "exportparts": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "part": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-activedescendant": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-atomic": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-autocomplete": {
+        "mode": "direct",
+        "type": "\"none\" | \"list\" | \"inline\" | \"both\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-braillelabel": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-brailleroledescription": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-busy": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-checked": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\" | \"mixed\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-colcount": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-colindex": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-colindextext": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-colspan": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-controls": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-current": {
+        "mode": "direct",
+        "type": "boolean | \"date\" | \"time\" | \"true\" | \"false\" | \"page\" | \"step\" | \"location\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-describedby": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-description": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-details": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-disabled": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-dropeffect": {
+        "mode": "direct",
+        "type": "\"none\" | \"link\" | \"copy\" | \"execute\" | \"move\" | \"popup\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-errormessage": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-expanded": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-flowto": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-grabbed": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-haspopup": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\" | \"dialog\" | \"grid\" | \"listbox\" | \"menu\" | \"tree\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-hidden": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-invalid": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\" | \"grammar\" | \"spelling\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-keyshortcuts": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-label": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-labelledby": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-level": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-live": {
+        "mode": "direct",
+        "type": "\"off\" | \"assertive\" | \"polite\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-modal": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-multiline": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-multiselectable": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-orientation": {
+        "mode": "direct",
+        "type": "\"horizontal\" | \"vertical\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-owns": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-placeholder": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-posinset": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-pressed": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\" | \"mixed\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-readonly": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-relevant": {
+        "mode": "direct",
+        "type": "\"text\" | \"additions\" | \"additions removals\" | \"additions text\" | \"all\" | \"removals\" | \"removals additions\" | \"removals text\" | \"text additions\" | \"text removals\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-required": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-roledescription": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-rowcount": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-rowindex": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-rowindextext": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-rowspan": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-selected": {
+        "mode": "direct",
+        "type": "boolean | \"true\" | \"false\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-setsize": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-sort": {
+        "mode": "direct",
+        "type": "\"none\" | \"ascending\" | \"descending\" | \"other\"",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-valuemax": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-valuemin": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-valuenow": {
+        "mode": "direct",
+        "type": "number",
+        "note": "Forwarded to the download anchor."
+      },
+      "aria-valuetext": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Forwarded to the download anchor."
+      },
+      "dangerouslySetInnerHTML": {
+        "mode": "unsupported",
+        "note": "Ref/imperative DOM or raw HTML is not a serialized Dash property; use children."
+      },
+      "onCopy": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCopyCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCut": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCutCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPaste": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPasteCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCompositionEnd": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCompositionEndCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCompositionStart": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCompositionStartCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCompositionUpdate": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCompositionUpdateCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onFocus": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onFocusCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onBlur": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onBlurCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onChange": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onChangeCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onBeforeInput": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onBeforeInputCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onInput": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onInputCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onReset": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onResetCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSubmit": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSubmitCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onInvalid": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onInvalidCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLoad": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLoadCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onError": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onErrorCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onKeyDown": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onKeyDownCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onKeyPress": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onKeyPressCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onKeyUp": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onKeyUpCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAbort": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAbortCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCanPlay": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCanPlayCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCanPlayThrough": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onCanPlayThroughCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDurationChange": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDurationChangeCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onEmptied": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onEmptiedCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onEncrypted": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onEncryptedCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onEnded": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onEndedCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLoadedData": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLoadedDataCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLoadedMetadata": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLoadedMetadataCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLoadStart": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLoadStartCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPause": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPauseCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPlay": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPlayCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPlaying": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPlayingCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onProgress": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onProgressCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onRateChange": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onRateChangeCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSeeked": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSeekedCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSeeking": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSeekingCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onStalled": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onStalledCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSuspend": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSuspendCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTimeUpdate": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTimeUpdateCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onVolumeChange": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onVolumeChangeCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onWaiting": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onWaitingCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAuxClick": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAuxClickCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onClickCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onContextMenu": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onContextMenuCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDoubleClick": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDoubleClickCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDrag": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragEnd": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragEndCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragEnter": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragEnterCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragExit": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragExitCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragLeave": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragLeaveCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragOver": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragOverCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragStart": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDragStartCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDrop": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onDropCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseDown": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseDownCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseEnter": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseLeave": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseMove": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseMoveCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseOut": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseOutCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseOver": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseOverCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseUp": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onMouseUpCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSelect": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onSelectCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTouchCancel": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTouchCancelCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTouchEnd": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTouchEndCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTouchMove": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTouchMoveCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTouchStart": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTouchStartCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerDown": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerDownCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerMove": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerMoveCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerUp": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerUpCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerCancel": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerCancelCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerEnter": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerLeave": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerOver": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerOverCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerOut": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onPointerOutCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onGotPointerCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onGotPointerCaptureCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLostPointerCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onLostPointerCaptureCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onScroll": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onScrollCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onScrollEnd": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onScrollEndCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onWheel": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onWheelCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAnimationStart": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAnimationStartCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAnimationEnd": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAnimationEndCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAnimationIteration": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onAnimationIterationCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onToggle": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onBeforeToggle": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTransitionCancel": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTransitionCancelCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTransitionEnd": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTransitionEndCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTransitionRun": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTransitionRunCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTransitionStart": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "onTransitionStartCapture": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "JS event followed by options and context. onClick also updates n_clicks."
+      },
+      "document": {
+        "mode": "adapted",
+        "type": "React.ReactNode",
+        "note": "PDF document. Standard input for PDFDownloadLink and BlobProvider; also accepted by PDFViewer."
+      },
+      "children": {
+        "mode": "adapted",
+        "type": "React.ReactNode",
+        "note": "Viewer Document or download/status HTML UI. Legacy Document children are accepted only without document."
+      },
+      "fileName": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Download filename. Default: document.pdf."
+      },
+      "width": {
+        "mode": "direct",
+        "type": "number | string",
+        "note": "Preview width. Default: 100%."
+      },
+      "height": {
+        "mode": "direct",
+        "type": "number | string",
+        "note": "Preview height in pixels or CSS length. Default: 700."
+      },
+      "showToolbar": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Show floating page controls, or native browser toolbar hint. Default: true."
+      },
+      "style": {
+        "mode": "direct",
+        "type": "Record<string, any>",
+        "note": "CSS styles on the HTML container (viewer/provider) or download anchor."
+      },
+      "className": {
+        "mode": "direct",
+        "type": "string",
+        "note": "HTML class name."
+      },
+      "render": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "Named function producing DOM UI from {loading, error, url, size, data}."
+      },
+      "previewMode": {
+        "mode": "adapted",
+        "type": "\"playground\" | \"native\"",
+        "note": "Preview style. Default: playground; native uses the browser PDF viewer."
+      },
+      "pageNumber": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Controlled preview page, starting at 1. Default: 1."
+      },
+      "numPages": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only loaded preview page count."
+      },
+      "frameId": {
+        "mode": "adapted",
+        "type": "string",
+        "note": "Stable iframe DOM ID, replacing a non-serializable innerRef."
+      },
+      "showDownload": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Include a download link with a preview. Default: true."
+      },
+      "downloadLabel": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Default download text."
+      },
+      "fonts": {
+        "mode": "adapted",
+        "type": "Record<string, any>[]",
+        "note": "Font registrations with family and either src or fonts. Font request options match renderer."
+      },
+      "emojiSource": {
+        "mode": "adapted",
+        "type": "Record<string, any>",
+        "note": "Emoji URL configuration, or {builder: {function, options}}."
+      },
+      "hyphenationCallback": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "Job-scoped named global hyphenation function. Omit for renderer default."
+      },
+      "fontAction": {
+        "mode": "adapted",
+        "type": "\"load\" | \"reset\" | \"clear\"",
+        "note": "Explicit font operation performed before generation. clear restores standard fonts before registering fonts."
+      },
+      "fontDescriptors": {
+        "mode": "adapted",
+        "type": "Record<string, any>[]",
+        "note": "Font descriptors for load or diagnostic getFont calls: fontFamily/fontWeight/fontStyle."
+      },
+      "autoGenerate": {
+        "mode": "adapted",
+        "type": "boolean",
+        "note": "Generate automatically when document or configuration changes. Default: true."
+      },
+      "n_generate": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Change this counter to generate manually, adapting usePDF update/pdf.updateContainer."
+      },
+      "n_render": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only count of latest successful generations; adapts Document.onRender."
+      },
+      "n_clicks": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only number of download anchor clicks."
+      },
+      "loading": {
+        "mode": "adapted",
+        "type": "boolean",
+        "note": "Read-only generation loading state, distinct from Dash callback loading."
+      },
+      "error": {
+        "mode": "adapted",
+        "type": "string | null",
+        "note": "Read-only error message or null."
+      },
+      "url": {
+        "mode": "adapted",
+        "type": "string | null",
+        "note": "Read-only current browser-local Blob URL; revoked on replacement or unmount."
+      },
+      "size": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only byte count."
+      },
+      "returnBase64": {
+        "mode": "adapted",
+        "type": "boolean",
+        "note": "Opt in to Base64 transmission to Python callbacks. Default: false."
+      },
+      "data": {
+        "mode": "adapted",
+        "type": "string | null",
+        "note": "Read-only Base64 PDF when enabled."
+      },
+      "rendererVersion": {
+        "mode": "adapted",
+        "type": "string",
+        "note": "Read-only renderer version."
+      },
+      "fontFamilies": {
+        "mode": "adapted",
+        "type": "string[]",
+        "note": "Read-only registered family names after generation."
+      },
+      "fontInfo": {
+        "mode": "adapted",
+        "type": "Record<string, any>",
+        "note": "Read-only serializable font-source diagnostics (no fontkit objects)."
+      }
+    },
+    "PDFViewer": {
+      "document": {
+        "mode": "adapted",
+        "type": "React.ReactNode",
+        "note": "PDF document. Standard input for PDFDownloadLink and BlobProvider; also accepted by PDFViewer."
+      },
+      "children": {
+        "mode": "adapted",
+        "type": "React.ReactNode",
+        "note": "Viewer Document or download/status HTML UI. Legacy Document children are accepted only without document."
+      },
+      "fileName": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Download filename. Default: document.pdf."
+      },
+      "width": {
+        "mode": "direct",
+        "type": "number | string",
+        "note": "Preview width. Default: 100%."
+      },
+      "height": {
+        "mode": "direct",
+        "type": "number | string",
+        "note": "Preview height in pixels or CSS length. Default: 700."
+      },
+      "showToolbar": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Show floating page controls, or native browser toolbar hint. Default: true."
+      },
+      "style": {
+        "mode": "direct",
+        "type": "Record<string, any>",
+        "note": "CSS styles on the HTML container (viewer/provider) or download anchor."
+      },
+      "className": {
+        "mode": "direct",
+        "type": "string",
+        "note": "HTML class name."
+      },
+      "innerRef": {
+        "mode": "unsupported",
+        "note": "React Ref cannot cross JSON. frameId supplies a stable iframe DOM ID for clientside access."
+      },
+      "render": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "Named function producing DOM UI from {loading, error, url, size, data}."
+      },
+      "previewMode": {
+        "mode": "adapted",
+        "type": "\"playground\" | \"native\"",
+        "note": "Preview style. Default: playground; native uses the browser PDF viewer."
+      },
+      "pageNumber": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Controlled preview page, starting at 1. Default: 1."
+      },
+      "numPages": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only loaded preview page count."
+      },
+      "frameId": {
+        "mode": "adapted",
+        "type": "string",
+        "note": "Stable iframe DOM ID, replacing a non-serializable innerRef."
+      },
+      "showDownload": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Include a download link with a preview. Default: true."
+      },
+      "downloadLabel": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Default download text."
+      },
+      "fonts": {
+        "mode": "adapted",
+        "type": "Record<string, any>[]",
+        "note": "Font registrations with family and either src or fonts. Font request options match renderer."
+      },
+      "emojiSource": {
+        "mode": "adapted",
+        "type": "Record<string, any>",
+        "note": "Emoji URL configuration, or {builder: {function, options}}."
+      },
+      "hyphenationCallback": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "Job-scoped named global hyphenation function. Omit for renderer default."
+      },
+      "fontAction": {
+        "mode": "adapted",
+        "type": "\"load\" | \"reset\" | \"clear\"",
+        "note": "Explicit font operation performed before generation. clear restores standard fonts before registering fonts."
+      },
+      "fontDescriptors": {
+        "mode": "adapted",
+        "type": "Record<string, any>[]",
+        "note": "Font descriptors for load or diagnostic getFont calls: fontFamily/fontWeight/fontStyle."
+      },
+      "autoGenerate": {
+        "mode": "adapted",
+        "type": "boolean",
+        "note": "Generate automatically when document or configuration changes. Default: true."
+      },
+      "n_generate": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Change this counter to generate manually, adapting usePDF update/pdf.updateContainer."
+      },
+      "n_render": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only count of latest successful generations; adapts Document.onRender."
+      },
+      "n_clicks": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only number of download anchor clicks."
+      },
+      "loading": {
+        "mode": "adapted",
+        "type": "boolean",
+        "note": "Read-only generation loading state, distinct from Dash callback loading."
+      },
+      "error": {
+        "mode": "adapted",
+        "type": "string | null",
+        "note": "Read-only error message or null."
+      },
+      "url": {
+        "mode": "adapted",
+        "type": "string | null",
+        "note": "Read-only current browser-local Blob URL; revoked on replacement or unmount."
+      },
+      "size": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only byte count."
+      },
+      "returnBase64": {
+        "mode": "adapted",
+        "type": "boolean",
+        "note": "Opt in to Base64 transmission to Python callbacks. Default: false."
+      },
+      "data": {
+        "mode": "adapted",
+        "type": "string | null",
+        "note": "Read-only Base64 PDF when enabled."
+      },
+      "rendererVersion": {
+        "mode": "adapted",
+        "type": "string",
+        "note": "Read-only renderer version."
+      },
+      "fontFamilies": {
+        "mode": "adapted",
+        "type": "string[]",
+        "note": "Read-only registered family names after generation."
+      },
+      "fontInfo": {
+        "mode": "adapted",
+        "type": "Record<string, any>",
+        "note": "Read-only serializable font-source diagnostics (no fontkit objects)."
+      }
+    },
+    "BlobProvider": {
+      "document": {
+        "mode": "adapted",
+        "type": "React.ReactNode",
+        "note": "PDF document. Standard input for PDFDownloadLink and BlobProvider; also accepted by PDFViewer."
+      },
+      "children": {
+        "mode": "adapted",
+        "type": "React.ReactNode",
+        "note": "Viewer Document or download/status HTML UI. Legacy Document children are accepted only without document."
+      },
+      "fileName": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Download filename. Default: document.pdf."
+      },
+      "width": {
+        "mode": "direct",
+        "type": "number | string",
+        "note": "Preview width. Default: 100%."
+      },
+      "height": {
+        "mode": "direct",
+        "type": "number | string",
+        "note": "Preview height in pixels or CSS length. Default: 700."
+      },
+      "showToolbar": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Show floating page controls, or native browser toolbar hint. Default: true."
+      },
+      "style": {
+        "mode": "direct",
+        "type": "Record<string, any>",
+        "note": "CSS styles on the HTML container (viewer/provider) or download anchor."
+      },
+      "className": {
+        "mode": "direct",
+        "type": "string",
+        "note": "HTML class name."
+      },
+      "render": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "Named function producing DOM UI from {loading, error, url, size, data}."
+      },
+      "previewMode": {
+        "mode": "adapted",
+        "type": "\"playground\" | \"native\"",
+        "note": "Preview style. Default: playground; native uses the browser PDF viewer."
+      },
+      "pageNumber": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Controlled preview page, starting at 1. Default: 1."
+      },
+      "numPages": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only loaded preview page count."
+      },
+      "frameId": {
+        "mode": "adapted",
+        "type": "string",
+        "note": "Stable iframe DOM ID, replacing a non-serializable innerRef."
+      },
+      "showDownload": {
+        "mode": "direct",
+        "type": "boolean",
+        "note": "Include a download link with a preview. Default: true."
+      },
+      "downloadLabel": {
+        "mode": "direct",
+        "type": "string",
+        "note": "Default download text."
+      },
+      "fonts": {
+        "mode": "adapted",
+        "type": "Record<string, any>[]",
+        "note": "Font registrations with family and either src or fonts. Font request options match renderer."
+      },
+      "emojiSource": {
+        "mode": "adapted",
+        "type": "Record<string, any>",
+        "note": "Emoji URL configuration, or {builder: {function, options}}."
+      },
+      "hyphenationCallback": {
+        "mode": "adapted",
+        "type": "FunctionProps",
+        "note": "Job-scoped named global hyphenation function. Omit for renderer default."
+      },
+      "fontAction": {
+        "mode": "adapted",
+        "type": "\"load\" | \"reset\" | \"clear\"",
+        "note": "Explicit font operation performed before generation. clear restores standard fonts before registering fonts."
+      },
+      "fontDescriptors": {
+        "mode": "adapted",
+        "type": "Record<string, any>[]",
+        "note": "Font descriptors for load or diagnostic getFont calls: fontFamily/fontWeight/fontStyle."
+      },
+      "autoGenerate": {
+        "mode": "adapted",
+        "type": "boolean",
+        "note": "Generate automatically when document or configuration changes. Default: true."
+      },
+      "n_generate": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Change this counter to generate manually, adapting usePDF update/pdf.updateContainer."
+      },
+      "n_render": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only count of latest successful generations; adapts Document.onRender."
+      },
+      "n_clicks": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only number of download anchor clicks."
+      },
+      "loading": {
+        "mode": "adapted",
+        "type": "boolean",
+        "note": "Read-only generation loading state, distinct from Dash callback loading."
+      },
+      "error": {
+        "mode": "adapted",
+        "type": "string | null",
+        "note": "Read-only error message or null."
+      },
+      "url": {
+        "mode": "adapted",
+        "type": "string | null",
+        "note": "Read-only current browser-local Blob URL; revoked on replacement or unmount."
+      },
+      "size": {
+        "mode": "adapted",
+        "type": "number",
+        "note": "Read-only byte count."
+      },
+      "returnBase64": {
+        "mode": "adapted",
+        "type": "boolean",
+        "note": "Opt in to Base64 transmission to Python callbacks. Default: false."
+      },
+      "data": {
+        "mode": "adapted",
+        "type": "string | null",
+        "note": "Read-only Base64 PDF when enabled."
+      },
+      "rendererVersion": {
+        "mode": "adapted",
+        "type": "string",
+        "note": "Read-only renderer version."
+      },
+      "fontFamilies": {
+        "mode": "adapted",
+        "type": "string[]",
+        "note": "Read-only registered family names after generation."
+      },
+      "fontInfo": {
+        "mode": "adapted",
+        "type": "Record<string, any>",
+        "note": "Read-only serializable font-source diagnostics (no fontkit objects)."
+      }
+    }
+  },
+  "publicAPIs": {
+    "StyleSheet": {
+      "mode": "adapted",
+      "note": "PDFStyle dictionaries and media queries; no JS object crosses Python."
+    },
+    "Font": {
+      "mode": "adapted",
+      "note": "fonts/fontAction/fontDescriptors/emojiSource/hyphenationCallback/fontFamilies/fontInfo on each output; job-scoped global settings."
+    },
+    "usePDF": {
+      "mode": "adapted",
+      "note": "autoGenerate, n_generate, n_render and output state replace hooks/instance methods."
+    },
+    "pdf": {
+      "mode": "adapted",
+      "note": "autoGenerate, n_generate, n_render and output state replace hooks/instance methods."
+    },
+    "render": {
+      "mode": "unsupported",
+      "note": "Node-only API; explicitly outside the confirmed browser-only scope."
+    },
+    "renderToFile": {
+      "mode": "unsupported",
+      "note": "Node-only API; explicitly outside the confirmed browser-only scope."
+    },
+    "renderToStream": {
+      "mode": "unsupported",
+      "note": "Node-only API; explicitly outside the confirmed browser-only scope."
+    },
+    "renderToBuffer": {
+      "mode": "unsupported",
+      "note": "Node-only API; explicitly outside the confirmed browser-only scope."
+    },
+    "renderToString": {
+      "mode": "unsupported",
+      "note": "Node-only API; explicitly outside the confirmed browser-only scope."
+    },
+    "PDFRenderer": {
+      "mode": "unsupported",
+      "note": "Low-level reconciler/runtime objects are not serialized Dash API."
+    },
+    "container": {
+      "mode": "unsupported",
+      "note": "Low-level reconciler/runtime objects are not serialized Dash API."
+    },
+    "version": {
+      "mode": "adapted",
+      "note": "rendererVersion output property."
+    }
+  }
+}

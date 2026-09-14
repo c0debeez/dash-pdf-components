@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { Document as ReactPDFDocument, pdfjs } from "react-pdf";
 import type { DocumentProps as ReactPDFDocumentProps } from "react-pdf";
-import type { DocumentProps } from "props/Document";
+import type { DocumentProps } from "props/DocumentView";
 import {
   annotationImagesPath,
   configurePdfAssets,
@@ -10,7 +10,6 @@ import {
   itemClickData,
   useStableValue,
 } from "./shared";
-import { PDFNavigationContext, type RegisteredPDFPage } from "./navigation";
 
 const Document = ({
   children,
@@ -26,7 +25,6 @@ const Document = ({
   scale = 1,
   password,
   numPages: _numPages,
-  loadData: _loadData,
   documentData: _documentData,
   loadProgress: _loadProgress,
   sourceLoaded: _sourceLoaded,
@@ -38,7 +36,12 @@ const Document = ({
   setProps,
   navigate,
   ...baseProps
-}: DocumentProps & { navigate?: (pageNumber: number) => void }) => {
+}: Omit<DocumentProps, "file"> & {
+  file?: DocumentProps["file"] | Blob;
+  navigate?: (pageNumber: number) => void;
+}) => {
+  const navigationCallback = useRef(navigate);
+  navigationCallback.current = navigate;
   const stableFile = useStableValue(file);
   const stableOptions = useStableValue(options);
   const documentOptions = useMemo(
@@ -48,14 +51,6 @@ const Document = ({
   const passwordCallback = useRef<((password: string | null) => void) | null>(
     null,
   );
-  const registeredPages = useRef(new Map<symbol, RegisteredPDFPage>());
-  const registerPage = useCallback((key: symbol, page: RegisteredPDFPage) => {
-    registeredPages.current.set(key, page);
-    return () => {
-      registeredPages.current.delete(key);
-    };
-  }, []);
-  const navigationContext = useMemo(() => ({ registerPage }), [registerPage]);
 
   useEffect(() => {
     if (!password || !passwordCallback.current) return;
@@ -66,7 +61,6 @@ const Document = ({
   useEffect(() => {
     setProps?.({
       numPages: null,
-      loadData: null,
       documentData: null,
       loadProgress: null,
       sourceLoaded: false,
@@ -80,7 +74,6 @@ const Document = ({
   ) => {
     setProps?.({
       numPages: pdf.numPages,
-      loadData: { numPages: pdf.numPages, fingerprints: [...pdf.fingerprints] },
       documentData: {
         numPages: pdf.numPages,
         fingerprints: [...pdf.fingerprints],
@@ -96,70 +89,63 @@ const Document = ({
     pageIndex: number;
     pageNumber: number;
   }) => {
-    const pages = [...registeredPages.current.values()];
-    const targetPage = pages.find((page) => page.pageNumber === pageNumber);
-
-    if (navigate) navigate(pageNumber);
-    else if (targetPage) targetPage.scrollIntoView();
-    else if (pages.length === 1) pages[0].setPageNumber(pageNumber);
+    navigationCallback.current?.(pageNumber);
 
     setProps?.({ itemClickData: itemClickData(pageIndex, pageNumber) });
   };
 
   return (
-    <PDFNavigationContext.Provider value={navigationContext}>
-      <DashContainer {...baseProps} setProps={setProps}>
-        <ReactPDFDocument
-          file={stableFile}
-          options={documentOptions}
-          imageResourcesPath={
-            imageResourcesPath || annotationImagesPath(assetBaseUrl)
-          }
-          externalLinkRel={externalLinkRel}
-          externalLinkTarget={externalLinkTarget}
-          renderMode={renderMode}
-          rotate={rotate}
-          scale={scale}
-          loading={null}
-          error={error}
-          noData={noData}
-          onItemClick={onItemClick}
-          onLoadProgress={(progress) => setProps?.({ loadProgress: progress })}
-          onLoadSuccess={onLoadSuccess}
-          onLoadError={(value) =>
+    <DashContainer {...baseProps} setProps={setProps}>
+      <ReactPDFDocument
+        file={stableFile}
+        options={documentOptions}
+        imageResourcesPath={
+          imageResourcesPath || annotationImagesPath(assetBaseUrl)
+        }
+        externalLinkRel={externalLinkRel}
+        externalLinkTarget={externalLinkTarget}
+        renderMode={renderMode}
+        rotate={rotate}
+        scale={scale}
+        loading={null}
+        error={error}
+        noData={noData}
+        onItemClick={onItemClick}
+        onLoadProgress={(progress) => setProps?.({ loadProgress: progress })}
+        onLoadSuccess={onLoadSuccess}
+        onLoadError={(value) =>
+          setProps?.({
+            numPages: null,
+            errorData: errorData("document", value),
+          })
+        }
+        onSourceSuccess={() => setProps?.({ sourceLoaded: true })}
+        onSourceError={(value) =>
+          setProps?.({
+            sourceLoaded: false,
+            errorData: errorData("source", value),
+          })
+        }
+        onPassword={(callback, reason) => {
+          passwordCallback.current = callback;
+          if (password && reason === pdfjs.PasswordResponses.NEED_PASSWORD) {
+            callback(password);
+            passwordCallback.current = null;
+          } else {
             setProps?.({
-              numPages: null,
-              errorData: errorData("document", value),
-            })
+              passwordData: {
+                reason:
+                  reason === pdfjs.PasswordResponses.INCORRECT_PASSWORD
+                    ? "incorrect-password"
+                    : "need-password",
+              },
+            });
           }
-          onSourceSuccess={() => setProps?.({ sourceLoaded: true })}
-          onSourceError={(value) =>
-            setProps?.({
-              sourceLoaded: false,
-              errorData: errorData("source", value),
-            })
-          }
-          onPassword={(callback, reason) => {
-            passwordCallback.current = callback;
-            if (password && reason === pdfjs.PasswordResponses.NEED_PASSWORD) {
-              callback(password);
-              passwordCallback.current = null;
-            } else {
-              setProps?.({
-                passwordData: {
-                  reason:
-                    reason === pdfjs.PasswordResponses.INCORRECT_PASSWORD
-                      ? "incorrect-password"
-                      : "need-password",
-                },
-              });
-            }
-          }}
-        >
-          {children}
-        </ReactPDFDocument>
-      </DashContainer>
-    </PDFNavigationContext.Provider>
+        }}
+      >
+        {children}
+      </ReactPDFDocument>
+    </DashContainer>
   );
 };
 

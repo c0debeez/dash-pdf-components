@@ -2,6 +2,7 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
+const WebpackDashDynamicImport = require("@plotly/webpack-dash-dynamic-import");
 const libraryName = "dash_pdf_components";
 const pdfjsRoot = path.dirname(require.resolve("pdfjs-dist/package.json"));
 
@@ -33,6 +34,7 @@ module.exports = (env = {}) => {
         output: {
             path: path.join(__dirname, libraryName),
             filename: "[name].js",
+            chunkFilename: "[name].js",
             assetModuleFilename: "pdfjs/build/[name][ext]",
             library: libraryName,
             libraryTarget: "umd",
@@ -49,6 +51,7 @@ module.exports = (env = {}) => {
         resolve: {
             modules: [path.resolve(__dirname, "src"), "node_modules"],
             extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+            fallback: { stream: require.resolve("stream-browserify"), zlib: require.resolve("browserify-zlib"), buffer: require.resolve("buffer/"), util: require.resolve("util/"), assert: require.resolve("assert/"), fs: false },
         },
         module: {
             rules: [
@@ -59,10 +62,14 @@ module.exports = (env = {}) => {
         },
         optimization: {
             minimize: !development,
+            chunkIds: "named",
+            splitChunks: { chunks: "async", cacheGroups: { default: false, defaultVendors: false } },
             minimizer: [new TerserPlugin({ parallel: true, extractComments: false })],
         },
         performance: { hints: false },
         plugins: [
+            new WebpackDashDynamicImport(),
+            new (require("webpack").ProvidePlugin)({ Buffer: ["buffer", "Buffer"], process: require.resolve("process/browser.js") }),
             new CopyPlugin({
                 patterns: ["cmaps", "standard_fonts", "wasm", "iccs", "web/images"].map((directory) => ({
                     from: path.join(pdfjsRoot, directory),

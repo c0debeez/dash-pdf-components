@@ -1,8 +1,7 @@
 import React from "react";
-import PDFView from "fragments/PDF";
+import PDFController from "fragments/PDFController";
 import type { PDFProps } from "props/PDF";
 
-/** Renders the current page, all pages, or selected PDF pages with automatic sizing and navigation. */
-const PDF = (props: PDFProps) => <PDFView {...props} />;
-
+/** Displays an existing PDF or generates one from a Document description, with optional download or Blob output. */
+const PDF = (props: PDFProps) => <PDFController {...props} />;
 export default PDF;

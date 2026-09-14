@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import type { PDFPageProxy } from "pdfjs-dist";
 import { fitPageWidth } from "./viewer";
 import { Page as ReactPDFPage } from "react-pdf";
-import type { PageProps } from "props/Page";
+import type { PageProps } from "props/PageView";
 import { DashContainer, errorData, pageData } from "./shared";
-import { PDFNavigationContext } from "./navigation";
 
 const Page = ({
   children,
@@ -24,7 +23,6 @@ const Page = ({
   rotate,
   scale = 1,
   width,
-  loadData: _loadData,
   pageData: _pageData,
   renderData: _renderData,
   errorData: _errorData,
@@ -50,25 +48,11 @@ const Page = ({
     viewport?.width ?? 0,
     viewport?.height ?? 0,
   );
-  const navigation = useContext(PDFNavigationContext);
-  const pageElement = useRef<HTMLDivElement | null>(null);
-  const registrationKey = useRef(Symbol("pdf-page"));
   const effectivePageNumber = pageNumber ?? (pageIndex ?? 0) + 1;
-
-  useEffect(() => {
-    if (!navigation) return;
-    return navigation.registerPage(registrationKey.current, {
-      pageNumber: effectivePageNumber,
-      setPageNumber: (nextPageNumber) =>
-        setProps?.({ pageNumber: nextPageNumber }),
-      scrollIntoView: () => pageElement.current?.scrollIntoView(),
-    });
-  }, [effectivePageNumber, navigation, setProps]);
 
   return (
     <DashContainer {...baseProps} setProps={setProps}>
       <ReactPDFPage
-        inputRef={pageElement}
         canvasBackground={canvasBackground}
         devicePixelRatio={devicePixelRatio}
         height={fit ? undefined : height}
@@ -89,7 +73,6 @@ const Page = ({
         onLoadSuccess={(value) => {
           setLoadedPage(value);
           setProps?.({
-            loadData: pageData(value),
             pageData: pageData(value),
             errorData: null,
           });

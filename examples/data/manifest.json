@@ -1,0 +1,527 @@
+[
+  {
+    "id": "repository-scripts",
+    "name": "World Scripts",
+    "description": "Complex script rendering — Bengali, Tamil, Thai, Arabic, Devanagari, and accented Latin",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/scripts",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-duplicated-images",
+    "name": "Duplicated Images",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/duplicated-images",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-ellipsis",
+    "name": "Ellipsis",
+    "description": "Text truncation with ellipsis at various widths and line limits",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/ellipsis",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-emoji",
+    "name": "Emoji",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/emoji",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-float",
+    "name": "Float (Text Wrapping)",
+    "description": "Text wrapping around floated elements using float: left/right",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/float",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-font-family-fallback",
+    "name": "Font Family Fallback",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/font-family-fallback",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-font-feature-settings",
+    "name": "Font Feature Settings",
+    "description": "OpenType font features like tabular figures, ligatures and small caps",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/font-feature-settings",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-font-weight",
+    "name": "Font Weight",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/font-weight",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-go-to",
+    "name": "Go To",
+    "description": "Internal document navigation with anchor links",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/go-to",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-image-background",
+    "name": "Image Background",
+    "description": "ImageBackground component with children layered over images",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/image-background",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-image-stress-test",
+    "name": "Image Stress Test",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/image-stress-test",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-jpg-orientation",
+    "name": "Jpg Orientation",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/jpg-orientation",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-knobs",
+    "name": "Knobs",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/knobs",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-link",
+    "name": "Link",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/link",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-media-queries",
+    "name": "Media Queries",
+    "description": "Responsive layout using media queries",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/media-queries",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-min-presence-ahead",
+    "name": "Min Presence Ahead",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/min-presence-ahead",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-multiline-text",
+    "name": "Multiline Text",
+    "description": "Inline text styling and multiline wrapping examples",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/multiline-text",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-object-fit",
+    "name": "Object Fit",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/object-fit",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-page-wrap",
+    "name": "Page Wrap",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/page-wrap",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-resume",
+    "name": "Resume",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/resume",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-svg",
+    "name": "Svg",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/svg",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-svg-image",
+    "name": "SVG Image",
+    "description": "SVG files rendered via the Image component",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/svg-image",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-svg-transform",
+    "name": "Svg Transform",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/svg-transform",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-transform-origin",
+    "name": "Transform Origin",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/transform-origin",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-forms",
+    "name": "Forms",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/forms",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-responsive-images",
+    "name": "Responsive Images",
+    "description": "srcSet and sizes for responsive image selection",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/responsive-images",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-math",
+    "name": "Math (LaTeX)",
+    "description": "Render LaTeX math expressions using @react-pdf/math",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/math",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-mermaid",
+    "name": "Mermaid Diagrams",
+    "description": "Render Mermaid diagrams using @react-pdf/mermaid",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/mermaid",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-password-protection",
+    "name": "Password Protection",
+    "description": "PDF with password protection and permissions",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/password-protection",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-soft-hyphens",
+    "name": "Soft Hyphens",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/soft-hyphens",
+    "group": "Repository"
+  },
+  {
+    "id": "repository-tailwind",
+    "name": "Tailwind",
+    "description": "",
+    "source": "https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples/tailwind",
+    "group": "Repository"
+  },
+  {
+    "id": "playground-breakable-unbreakable",
+    "name": "breakable-unbreakable",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=breakable-unbreakable",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-checkbox",
+    "name": "checkbox",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=checkbox",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-circle",
+    "name": "circle",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=circle",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-clippath",
+    "name": "clippath",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=clippath",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-debugging",
+    "name": "debugging",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=debugging",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-disable-hyphenation",
+    "name": "disable-hyphenation",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=disable-hyphenation",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-disable-wrapping",
+    "name": "disable-wrapping",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=disable-wrapping",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-ellipse",
+    "name": "ellipse",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=ellipse",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-emoji",
+    "name": "emoji",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=emoji",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-fixed-components",
+    "name": "fixed-components",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=fixed-components",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-float",
+    "name": "float",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=float",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-font-feature-settings",
+    "name": "font-feature-settings",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=font-feature-settings",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-font-register",
+    "name": "font-register",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=font-register",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-formfield",
+    "name": "formfield",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=formfield",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-fractals",
+    "name": "fractals",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=fractals",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-g",
+    "name": "g",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=g",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-hyphenation-callback",
+    "name": "hyphenation-callback",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=hyphenation-callback",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-images",
+    "name": "images",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=images",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-inline-styles",
+    "name": "inline-styles",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=inline-styles",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-knobs",
+    "name": "knobs",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=knobs",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-line",
+    "name": "line",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=line",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-lineargradient",
+    "name": "lineargradient",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=lineargradient",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-math",
+    "name": "math",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=math",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-media-queries",
+    "name": "media-queries",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=media-queries",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-mixed-styles",
+    "name": "mixed-styles",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=mixed-styles",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-orphans-and-widows",
+    "name": "orphans-and-widows",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=orphans-and-widows",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-page-breaks",
+    "name": "page-breaks",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=page-breaks",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-page-numbers",
+    "name": "page-numbers",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=page-numbers",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-page-wrap",
+    "name": "page-wrap",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=page-wrap",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-path",
+    "name": "path",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=path",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-picker-formlist",
+    "name": "picker-formlist",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=picker-formlist",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-polygon",
+    "name": "polygon",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=polygon",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-polyline",
+    "name": "polyline",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=polyline",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-quick-start",
+    "name": "quick-start",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=quick-start",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-radialgradient",
+    "name": "radialgradient",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=radialgradient",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-rect",
+    "name": "rect",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=rect",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-resume",
+    "name": "resume",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=resume",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-shape-outside",
+    "name": "shape-outside",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=shape-outside",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-styles",
+    "name": "styles",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=styles",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-svg",
+    "name": "svg",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=svg",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-svgtext",
+    "name": "svgtext",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=svgtext",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-tailwind",
+    "name": "tailwind",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=tailwind",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-text",
+    "name": "text",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=text",
+    "group": "Playground"
+  },
+  {
+    "id": "playground-textinput",
+    "name": "textinput",
+    "description": "",
+    "source": "https://react-pdf.org/playground?example=textinput",
+    "group": "Playground"
+  }
+]

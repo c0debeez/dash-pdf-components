@@ -1,0 +1,1511 @@
+{
+  "package": "@react-pdf/renderer",
+  "version": "4.9.0",
+  "source": "@react-pdf/renderer/lib/react-pdf.d.ts",
+  "note": "Type declaration inventory, not proof of runtime support. Imported types and implementation must also be audited.",
+  "exports": [
+    {
+      "name": "Document",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<DocumentProps>\n  >"
+    },
+    {
+      "name": "Page",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<PageProps>\n  >"
+    },
+    {
+      "name": "View",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<ViewProps>\n  >"
+    },
+    {
+      "name": "Image",
+      "kind": "component",
+      "type": "extends React.Component<ImageProps>"
+    },
+    {
+      "name": "ImageBackground",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<ImageBackgroundProps>\n  >"
+    },
+    {
+      "name": "Text",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<TextProps> | SVGTextProps\n  >"
+    },
+    {
+      "name": "Link",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<LinkProps>\n  >"
+    },
+    {
+      "name": "FieldSet",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<FieldSetProps>\n  >"
+    },
+    {
+      "name": "TextInput",
+      "kind": "component",
+      "type": "extends React.Component<TextInputProps>"
+    },
+    {
+      "name": "Checkbox",
+      "kind": "component",
+      "type": "extends React.Component<CheckboxProps>"
+    },
+    {
+      "name": "Select",
+      "kind": "component",
+      "type": "extends React.Component<SelectAndListProps>"
+    },
+    {
+      "name": "List",
+      "kind": "component",
+      "type": "extends React.Component<SelectAndListProps>"
+    },
+    {
+      "name": "Note",
+      "kind": "component",
+      "type": "extends React.Component<NoteProps>"
+    },
+    {
+      "name": "Canvas",
+      "kind": "component",
+      "type": "extends React.Component<CanvasProps>"
+    },
+    {
+      "name": "Svg",
+      "kind": "component",
+      "type": "extends React.Component<React.PropsWithChildren<SVGProps>>"
+    },
+    {
+      "name": "Line",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<LineProps>\n  >"
+    },
+    {
+      "name": "Polyline",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<PolylineProps>\n  >"
+    },
+    {
+      "name": "Polygon",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<PolygonProps>\n  >"
+    },
+    {
+      "name": "Path",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<PathProps>\n  >"
+    },
+    {
+      "name": "Rect",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<RectProps>\n  >"
+    },
+    {
+      "name": "Circle",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<CircleProps>\n  >"
+    },
+    {
+      "name": "Ellipse",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<EllipseProps>\n  >"
+    },
+    {
+      "name": "Tspan",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<TspanProps>\n  >"
+    },
+    {
+      "name": "G",
+      "kind": "component",
+      "type": "extends React.Component<React.PropsWithChildren<GProps>>"
+    },
+    {
+      "name": "Stop",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<StopProps>\n  >"
+    },
+    {
+      "name": "Defs",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<DefsProps>\n  >"
+    },
+    {
+      "name": "ClipPath",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<ClipPathProps>\n  >"
+    },
+    {
+      "name": "Marker",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<MarkerProps>\n  >"
+    },
+    {
+      "name": "LinearGradient",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<LinearGradientProps>\n  >"
+    },
+    {
+      "name": "RadialGradient",
+      "kind": "component",
+      "type": "extends React.Component<\n    React.PropsWithChildren<RadialGradientProps>\n  >"
+    },
+    {
+      "name": "BlobProvider",
+      "kind": "component",
+      "type": "extends React.Component<BlobProviderProps>"
+    },
+    {
+      "name": "PDFViewer",
+      "kind": "component",
+      "type": "extends React.Component<PDFViewerProps>"
+    },
+    {
+      "name": "PDFDownloadLink",
+      "kind": "component",
+      "type": "extends React.Component<PDFDownloadLinkProps>"
+    },
+    {
+      "name": "usePDF",
+      "kind": "function",
+      "signature": "export function usePDF(options?: {\n    document?: React.ReactElement<DocumentProps>;\n  }): [\n    UsePDFInstance,\n    (newDocument: React.ReactElement<DocumentProps>) => void,\n  ];"
+    },
+    {
+      "name": "Font",
+      "kind": "value",
+      "type": "FontStore"
+    },
+    {
+      "name": "StyleSheet",
+      "kind": "value",
+      "type": "{\n    create: <T extends Styles>(styles: T) => T;\n  }"
+    },
+    {
+      "name": "version",
+      "kind": "value",
+      "type": "any"
+    },
+    {
+      "name": "PDFRenderer",
+      "kind": "value",
+      "type": "any"
+    },
+    {
+      "name": "pdf",
+      "kind": "value",
+      "type": "(initialValue?: React.ReactElement<DocumentProps>) => {\n    container: any;\n    isDirty: () => boolean;\n    toString: () => string;\n    toBlob: () => Promise<Blob>;\n    toBuffer: () => Promise<NodeJS.ReadableStream>;\n    on: (event: 'change', callback: () => void) => void;\n    updateContainer: (\n      document: React.ReactElement<any>,\n      callback?: () => void,\n    ) => void;\n    removeListener: (event: 'change', callback: () => void) => void;\n  }"
+    },
+    {
+      "name": "renderToStream",
+      "kind": "value",
+      "type": "(\n    document: React.ReactElement<DocumentProps>,\n  ) => Promise<NodeJS.ReadableStream>"
+    },
+    {
+      "name": "renderToString",
+      "kind": "value",
+      "type": "(\n    document: React.ReactElement<DocumentProps>,\n  ) => Promise<string>"
+    },
+    {
+      "name": "renderToFile",
+      "kind": "value",
+      "type": "(\n    document: React.ReactElement<DocumentProps>,\n    filePath: string,\n    callback?: (output: NodeJS.ReadableStream, _filePath: string) => any,\n  ) => Promise<NodeJS.ReadableStream>"
+    },
+    {
+      "name": "renderToBuffer",
+      "kind": "value",
+      "type": "(\n    document: React.ReactElement<ReactPDF.DocumentProps>,\n  ) => Promise<Buffer>"
+    }
+  ],
+  "interfaces": {
+    "Styles": {
+      "extends": [],
+      "properties": [
+        {
+          "optional": false,
+          "type": "Style"
+        }
+      ]
+    },
+    "OnRenderProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "blob",
+          "optional": true,
+          "type": "Blob"
+        }
+      ]
+    },
+    "Permissions": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "printing",
+          "optional": true,
+          "type": "'lowResolution' | 'highResolution'"
+        },
+        {
+          "name": "modifying",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "copying",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "annotating",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "fillingForms",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "contentAccessibility",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "documentAssembly",
+          "optional": true,
+          "type": "boolean"
+        }
+      ]
+    },
+    "DocumentProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "StyleProp"
+        },
+        {
+          "name": "title",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "author",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "subject",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "creator",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "keywords",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "producer",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "language",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "creationDate",
+          "optional": true,
+          "type": "Date"
+        },
+        {
+          "name": "modificationDate",
+          "optional": true,
+          "type": "Date"
+        },
+        {
+          "name": "pdfVersion",
+          "optional": true,
+          "type": "PDFVersion"
+        },
+        {
+          "name": "conformance",
+          "optional": true,
+          "type": "PDFConformance"
+        },
+        {
+          "name": "pageMode",
+          "optional": true,
+          "type": "PageMode"
+        },
+        {
+          "name": "pageLayout",
+          "optional": true,
+          "type": "PageLayout"
+        },
+        {
+          "name": "ownerPassword",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "userPassword",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "permissions",
+          "optional": true,
+          "type": "Permissions"
+        },
+        {
+          "name": "onRender",
+          "optional": true,
+          "type": "(props: OnRenderProps) => any"
+        }
+      ]
+    },
+    "NodeProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "id",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "type": "StyleProp"
+        },
+        {
+          "name": "fixed",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "break",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "minPresenceAhead",
+          "optional": true,
+          "type": "number"
+        }
+      ]
+    },
+    "PageLayoutProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "children",
+          "optional": false,
+          "type": "React.ReactNode"
+        },
+        {
+          "name": "pageNumber",
+          "optional": true,
+          "type": "number"
+        },
+        {
+          "name": "totalPages",
+          "optional": true,
+          "type": "number"
+        },
+        {
+          "name": "subPageNumber",
+          "optional": true,
+          "type": "number"
+        },
+        {
+          "name": "subPageTotalPages",
+          "optional": true,
+          "type": "number"
+        }
+      ]
+    },
+    "PageProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "wrap",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "layout",
+          "optional": true,
+          "type": "(props: PageLayoutProps) => React.ReactNode"
+        },
+        {
+          "name": "experimentalPagination",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "debug",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "size",
+          "optional": true,
+          "type": "PageSize"
+        },
+        {
+          "name": "orientation",
+          "optional": true,
+          "type": "Orientation"
+        },
+        {
+          "name": "dpi",
+          "optional": true,
+          "type": "number"
+        },
+        {
+          "name": "bookmark",
+          "optional": true,
+          "type": "Bookmark"
+        }
+      ]
+    },
+    "ViewProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "id",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "wrap",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "debug",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "render",
+          "optional": true,
+          "type": "(props: {\n      pageNumber: number;\n      subPageNumber: number;\n    }) => React.ReactNode"
+        }
+      ]
+    },
+    "BaseImageProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "debug",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "cache",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "srcSet",
+          "optional": true,
+          "type": "SrcSet"
+        },
+        {
+          "name": "sizes",
+          "optional": true,
+          "type": "Sizes"
+        }
+      ]
+    },
+    "ImageWithSrcProp": {
+      "extends": [
+        "extends BaseImageProps"
+      ],
+      "properties": [
+        {
+          "name": "src",
+          "optional": false,
+          "type": "SourceObject"
+        }
+      ]
+    },
+    "ImageWithSourceProp": {
+      "extends": [
+        "extends BaseImageProps"
+      ],
+      "properties": [
+        {
+          "name": "source",
+          "optional": false,
+          "type": "SourceObject"
+        }
+      ]
+    },
+    "BaseImageBackgroundProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "debug",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "cache",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "srcSet",
+          "optional": true,
+          "type": "SrcSet"
+        },
+        {
+          "name": "sizes",
+          "optional": true,
+          "type": "Sizes"
+        },
+        {
+          "name": "imageStyle",
+          "optional": true,
+          "type": "Style"
+        }
+      ]
+    },
+    "ImageBackgroundWithSrcProp": {
+      "extends": [
+        "extends BaseImageBackgroundProps"
+      ],
+      "properties": [
+        {
+          "name": "src",
+          "optional": false,
+          "type": "SourceObject"
+        }
+      ]
+    },
+    "ImageBackgroundWithSourceProp": {
+      "extends": [
+        "extends BaseImageBackgroundProps"
+      ],
+      "properties": [
+        {
+          "name": "source",
+          "optional": false,
+          "type": "SourceObject"
+        }
+      ]
+    },
+    "TextProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "id",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "wrap",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "debug",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "render",
+          "optional": true,
+          "type": "(props: {\n      pageNumber: number;\n      totalPages: number;\n      subPageNumber: number;\n      subPageTotalPages: number;\n    }) => React.ReactNode"
+        },
+        {
+          "name": "hyphenationCallback",
+          "optional": true,
+          "type": "HyphenationCallback"
+        },
+        {
+          "name": "hyphenationPenalty",
+          "optional": true,
+          "type": "number"
+        },
+        {
+          "name": "orphans",
+          "optional": true,
+          "type": "number"
+        },
+        {
+          "name": "widows",
+          "optional": true,
+          "type": "number"
+        }
+      ]
+    },
+    "SVGTextProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "SVGPresentationAttributes"
+        },
+        {
+          "name": "x",
+          "optional": false,
+          "type": "string | number"
+        },
+        {
+          "name": "y",
+          "optional": false,
+          "type": "string | number"
+        },
+        {
+          "name": "hyphenationCallback",
+          "optional": true,
+          "type": "HyphenationCallback"
+        }
+      ]
+    },
+    "LinkProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "wrap",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "debug",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "href",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "src",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "hitSlop",
+          "optional": true,
+          "type": "HitSlop"
+        }
+      ]
+    },
+    "FormCommonProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "name",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "required",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "noExport",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "readOnly",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "value",
+          "optional": true,
+          "type": "number | string"
+        },
+        {
+          "name": "defaultValue",
+          "optional": true,
+          "type": "number | string"
+        }
+      ]
+    },
+    "FieldSetProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "name",
+          "optional": false,
+          "type": "string"
+        }
+      ]
+    },
+    "TextInputFormatting": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "type",
+          "optional": false,
+          "type": "| 'date'\n      | 'time'\n      | 'percent'\n      | 'number'\n      | 'zip'\n      | 'zipPlus4'\n      | 'phone'\n      | 'ssn'"
+        },
+        {
+          "name": "param",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "nDec",
+          "optional": true,
+          "type": "number"
+        },
+        {
+          "name": "sepComma",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "negStyle",
+          "optional": true,
+          "type": "'MinusBlack' | 'Red' | 'ParensBlack' | 'ParensRed'"
+        },
+        {
+          "name": "currency",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "currencyPrepend",
+          "optional": true,
+          "type": "boolean"
+        }
+      ]
+    },
+    "TextInputProps": {
+      "extends": [
+        "extends FormCommonProps"
+      ],
+      "properties": [
+        {
+          "name": "align",
+          "optional": true,
+          "type": "'left' | 'center' | 'right'"
+        },
+        {
+          "name": "multiline",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "password",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "noSpell",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "format",
+          "optional": true,
+          "type": "TextInputFormatting"
+        },
+        {
+          "name": "fontSize",
+          "optional": true,
+          "type": "number"
+        },
+        {
+          "name": "maxLength",
+          "optional": true,
+          "type": "number"
+        }
+      ]
+    },
+    "CheckboxProps": {
+      "extends": [
+        "extends FormCommonProps"
+      ],
+      "properties": [
+        {
+          "name": "backgroundColor",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "borderColor",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "checked",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "onState",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "offState",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "xMark",
+          "optional": true,
+          "type": "boolean"
+        }
+      ]
+    },
+    "SelectAndListPropsBase": {
+      "extends": [
+        "extends FormCommonProps"
+      ],
+      "properties": [
+        {
+          "name": "sort",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "edit",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "multiSelect",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "noSpell",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "select",
+          "optional": true,
+          "type": "string[]"
+        }
+      ]
+    },
+    "NoteProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "children",
+          "optional": false,
+          "type": "string"
+        }
+      ]
+    },
+    "CanvasProps": {
+      "extends": [
+        "extends NodeProps"
+      ],
+      "properties": [
+        {
+          "name": "debug",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "paint",
+          "optional": false,
+          "type": "(\n      painter: any,\n      availableWidth: number,\n      availableHeight: number,\n    ) => null"
+        }
+      ]
+    },
+    "SVGProps": {
+      "extends": [
+        "extends NodeProps, SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "debug",
+          "optional": true,
+          "type": "boolean"
+        },
+        {
+          "name": "width",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "height",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "viewBox",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "preserveAspectRatio",
+          "optional": true,
+          "type": "string"
+        }
+      ]
+    },
+    "LineProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "SVGPresentationAttributes"
+        },
+        {
+          "name": "x1",
+          "optional": false,
+          "type": "string | number"
+        },
+        {
+          "name": "x2",
+          "optional": false,
+          "type": "string | number"
+        },
+        {
+          "name": "y1",
+          "optional": false,
+          "type": "string | number"
+        },
+        {
+          "name": "y2",
+          "optional": false,
+          "type": "string | number"
+        }
+      ]
+    },
+    "PolylineProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "SVGPresentationAttributes"
+        },
+        {
+          "name": "points",
+          "optional": false,
+          "type": "string"
+        }
+      ]
+    },
+    "PolygonProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "SVGPresentationAttributes"
+        },
+        {
+          "name": "points",
+          "optional": false,
+          "type": "string"
+        }
+      ]
+    },
+    "PathProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "SVGPresentationAttributes"
+        },
+        {
+          "name": "d",
+          "optional": false,
+          "type": "string"
+        }
+      ]
+    },
+    "RectProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "SVGPresentationAttributes"
+        },
+        {
+          "name": "x",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "y",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "width",
+          "optional": false,
+          "type": "string | number"
+        },
+        {
+          "name": "height",
+          "optional": false,
+          "type": "string | number"
+        },
+        {
+          "name": "rx",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "ry",
+          "optional": true,
+          "type": "string | number"
+        }
+      ]
+    },
+    "CircleProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "SVGPresentationAttributes"
+        },
+        {
+          "name": "cx",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "cy",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "r",
+          "optional": false,
+          "type": "string | number"
+        }
+      ]
+    },
+    "EllipseProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "SVGPresentationAttributes"
+        },
+        {
+          "name": "cx",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "cy",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "rx",
+          "optional": false,
+          "type": "string | number"
+        },
+        {
+          "name": "ry",
+          "optional": false,
+          "type": "string | number"
+        }
+      ]
+    },
+    "TspanProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "x",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "y",
+          "optional": true,
+          "type": "string | number"
+        }
+      ]
+    },
+    "GProps": {
+      "extends": [
+        "extends SVGPresentationAttributes"
+      ],
+      "properties": [
+        {
+          "name": "style",
+          "optional": true,
+          "type": "Style"
+        }
+      ]
+    },
+    "StopProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "offset",
+          "optional": false,
+          "type": "string | number"
+        },
+        {
+          "name": "stopColor",
+          "optional": false,
+          "type": "string"
+        },
+        {
+          "name": "stopOpacity",
+          "optional": true,
+          "type": "string | number"
+        }
+      ]
+    },
+    "DefsProps": {
+      "extends": [],
+      "properties": []
+    },
+    "ClipPathProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "id",
+          "optional": true,
+          "type": "string"
+        }
+      ]
+    },
+    "MarkerProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": "string"
+        },
+        {
+          "name": "viewBox",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "refX",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "refY",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "markerWidth",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "markerHeight",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "orient",
+          "optional": true,
+          "type": "'auto' | 'auto-start-reverse' | number"
+        },
+        {
+          "name": "markerUnits",
+          "optional": true,
+          "type": "'strokeWidth' | 'userSpaceOnUse'"
+        }
+      ]
+    },
+    "LinearGradientProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": "string"
+        },
+        {
+          "name": "x1",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "x2",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "y1",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "y2",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "xlinkHref",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "gradientTransform",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "gradientUnits",
+          "optional": true,
+          "type": "'userSpaceOnUse' | 'objectBoundingBox'"
+        }
+      ]
+    },
+    "RadialGradientProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": "string"
+        },
+        {
+          "name": "cx",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "cy",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "r",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "fx",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "fy",
+          "optional": true,
+          "type": "string | number"
+        },
+        {
+          "name": "xlinkHref",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "gradientTransform",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "gradientUnits",
+          "optional": true,
+          "type": "'userSpaceOnUse' | 'objectBoundingBox'"
+        }
+      ]
+    },
+    "BlobProviderParams": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "blob",
+          "optional": false,
+          "type": "Blob | null"
+        },
+        {
+          "name": "url",
+          "optional": false,
+          "type": "string | null"
+        },
+        {
+          "name": "loading",
+          "optional": false,
+          "type": "boolean"
+        },
+        {
+          "name": "error",
+          "optional": false,
+          "type": "Error | null"
+        }
+      ]
+    },
+    "BlobProviderProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "document",
+          "optional": false,
+          "type": "React.ReactElement<DocumentProps>"
+        },
+        {
+          "name": "children",
+          "optional": false,
+          "type": "(params: BlobProviderParams) => React.ReactNode"
+        }
+      ]
+    },
+    "PDFViewerProps": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "width",
+          "optional": true,
+          "type": "number | string"
+        },
+        {
+          "name": "height",
+          "optional": true,
+          "type": "number | string"
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "type": "StyleProp"
+        },
+        {
+          "name": "className",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "children",
+          "optional": true,
+          "type": "React.ReactElement<DocumentProps>"
+        },
+        {
+          "name": "innerRef",
+          "optional": true,
+          "type": "React.Ref<HTMLIFrameElement>"
+        },
+        {
+          "name": "showToolbar",
+          "optional": true,
+          "type": "boolean"
+        }
+      ]
+    },
+    "PDFDownloadLinkProps": {
+      "extends": [
+        "extends Omit<\n      React.AnchorHTMLAttributes<HTMLAnchorElement>,\n      'href' | 'children'\n    >"
+      ],
+      "properties": [
+        {
+          "name": "fileName",
+          "optional": true,
+          "type": "string"
+        },
+        {
+          "name": "document",
+          "optional": false,
+          "type": "React.ReactElement<DocumentProps>"
+        },
+        {
+          "name": "children",
+          "optional": true,
+          "type": "React.ReactNode | React.FC<BlobProviderParams>"
+        },
+        {
+          "name": "onClick",
+          "optional": true,
+          "type": "React.AnchorHTMLAttributes<HTMLAnchorElement>['onClick'] &\n      ((\n        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,\n        instance: UsePDFInstance,\n      ) => void)"
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "type": "React.Ref<HTMLAnchorElement> | undefined"
+        }
+      ]
+    },
+    "UsePDFInstance": {
+      "extends": [],
+      "properties": [
+        {
+          "name": "loading",
+          "optional": false,
+          "type": "boolean"
+        },
+        {
+          "name": "blob",
+          "optional": false,
+          "type": "Blob | null"
+        },
+        {
+          "name": "url",
+          "optional": false,
+          "type": "string | null"
+        },
+        {
+          "name": "error",
+          "optional": false,
+          "type": "string | null"
+        }
+      ]
+    }
+  }
+}

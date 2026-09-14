@@ -48,7 +48,7 @@ const PDF = ({
   loading_state,
   setProps,
   ...baseProps
-}: PDFProps) => {
+}: Omit<PDFProps, "file"> & { file?: PDFProps["file"] | Blob }) => {
   const stableFile = useStableValue(file);
   const selection = useStableValue(
     pages ?? (pageNumber === "all" ? "all" : undefined),
@@ -134,7 +134,7 @@ const PDF = ({
 
   const updateDocumentProps = useCallback(
     (updates: PropUpdates) => {
-      const { loadData, itemClickData, ...documentUpdates } = updates;
+      const { itemClickData, ...documentUpdates } = updates;
       const nextUpdates: PropUpdates = { ...documentUpdates };
       if (typeof documentUpdates.numPages === "number") {
         setPageCount(documentUpdates.numPages);
@@ -148,7 +148,6 @@ const PDF = ({
         });
       }
 
-      if (loadData !== undefined) nextUpdates.documentData = loadData;
       if (itemClickData !== undefined) {
         nextUpdates.itemClickData = itemClickData;
       }
@@ -159,7 +158,7 @@ const PDF = ({
 
   const updatePageProps = useCallback(
     (updates: PropUpdates) => {
-      const { loadData, pageNumber: nextPageNumber, ...pageUpdates } = updates;
+      const { pageNumber: nextPageNumber, ...pageUpdates } = updates;
       if (pageUpdates.renderData) {
         readyPages.current.add(
           (pageUpdates.renderData as { pageNumber: number }).pageNumber,
@@ -167,7 +166,6 @@ const PDF = ({
         if (pendingPage.current !== null && scrollToPage(pendingPage.current))
           pendingPage.current = null;
       }
-      if (loadData !== undefined) pageUpdates.pageData = loadData;
       if (nextPageNumber !== undefined) updatePageNumber(nextPageNumber);
       if (Object.keys(pageUpdates).length > 0) setProps?.(pageUpdates);
     },

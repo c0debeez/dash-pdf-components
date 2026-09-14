@@ -1,529 +1,200 @@
-"""PDF demos. Set PDF_DEMO=basic for rendering only, or PDF_UI for reader controls."""
+"""Generate/read PDFs; PDF_DEMO=basic is display-only, PDF_DEMO=gallery runs all 75 examples."""
 
 import base64
 import os
-from importlib.util import find_spec
 from pathlib import Path
-from uuid import uuid4
 
-from dash import ALL, ClientsideFunction, Dash, Input, Output, State, ctx, dcc, get_asset_url, html, no_update
+from dash import Dash, Input, Output, State, ctx, dcc, get_asset_url, html, no_update
 
 import dash_pdf_components as dpc
 
 
-def select_ui():
-    requested = os.environ.get("PDF_UI", "auto").lower()
-    if requested not in {"auto", "antd", "mantine"}:
-        raise RuntimeError("PDF_UI must be auto, antd, or mantine.")
-    libraries = {"antd": "dash_antd_components", "mantine": "dash_mantine_components"}
-    for ui, library in libraries.items():
-        if requested in {"auto", ui} and find_spec(library) is not None:
-            return ui
-    raise RuntimeError(
-        "Install a demo UI library: pip install dash-ant-design "
-        "or pip install dash-mantine-components dash-iconify. "
-        "If PDF_UI is set, install the selected library."
+def report_document(title, text):
+    return dpc.Document(
+        dpc.Page(
+            [
+                dpc.Text(title, style={"fontSize": 20, "marginBottom": 16}),
+                dpc.Text(text, style={"fontSize": 12, "lineHeight": 1.5}),
+                dpc.Text(
+                    renderTemplate="{pageNumber} / {totalPages}",
+                    fixed=True,
+                    style={"position": "absolute", "bottom": 20, "right": 36, "fontSize": 10},
+                ),
+            ],
+            size="A4",
+            style={"padding": 36},
+        ),
+        title=title,
     )
 
 
-UI = None if os.environ.get("PDF_DEMO", "reader").lower() == "basic" else select_ui()
+def create_app(demo="default"):
+    if demo == "gallery":
+        from examples.usage import app
 
-ASSETS = Path(__file__).resolve().parent / "assets"
-# Don Quijote example from https://react-pdf.org/playground (Page wrapping).
-PDF_ASSET = "documents/quixote.pdf"
-ENCRYPTED_PDF_ASSET = "documents/quixote-encrypted.pdf"
-PAGE_COUNT = 4
-PAGE_WIDTH = 600
-ZOOM_PRESETS = (0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4)
-ZOOM_OPTIONS = [{"label": f"{int(value * 100)}%", "value": str(value)} for value in ZOOM_PRESETS]
-ZOOM_OPTIONS.append({"label": "Fit width", "value": "fit"})
+        return app
 
-
-def basic_usage():
-    return dpc.PDF(
-        file=get_asset_url(PDF_ASSET),
+    app = Dash(__name__, assets_folder=str(Path(__file__).resolve().parent / "assets"))
+    viewer = dpc.PDF(
+        id="pdf",
+        file=get_asset_url("documents/quixote.pdf"),
         pages="all",
         fit="width",
-        style={"height": "85vh", "maxWidth": 800, "margin": "24px auto"},
+        style={"height": "75vh"},
     )
 
-
-def stores():
-    return [
-        dcc.Store(id="pdf-current-page", data=1),
-        dcc.Store(id="pdf-viewport-width", data=PAGE_WIDTH),
-        dcc.Download(id="pdf-download"),
-    ]
-
-
-def document(error):
-    # Share one document between the outline, thumbnails, and independently controlled pages.
-    return dpc.Document(
-        html.Div(
+    if demo == "basic":
+        app.layout = viewer
+    else:
+        app.layout = html.Div(
             [
-                html.Aside(
-                    [
-                        html.H4("Contents"),
-                        dpc.Outline(id="pdf-outline"),
-                        html.Div(id="pdf-outline-empty"),
-                        html.H4("Thumbnails"),
-                        html.Div(id="pdf-thumbnails"),
-                    ],
-                    className="pdf-sidebar",
+                html.H1("Dash PDF"),
+                html.H2("Generate PDF"),
+                html.P("Edit the document, choose an output mode, then generate. No UI library is required."),
+                dcc.Input(id="report-title", value="Dash PDF report", placeholder="Document title", debounce=True),
+                dcc.Textarea(
+                    id="report-text",
+                    value="This PDF is generated in the browser from Document, Page and Text components.",
+                    style={"width": "100%", "minHeight": "100px", "marginTop": "12px"},
                 ),
-                html.Div(id="pdf-pages", className="pdf-pages"),
-            ],
-            className="pdf-reader",
-        ),
-        id="pdf-document",
-        file=get_asset_url(PDF_ASSET),
-        error=error,
-        style={"minHeight": 480, "width": "100%"},
-    )
-
-
-def render_pages(page, num_pages, mode, scale, rotation_clicks, viewport_width):
-    if not num_pages:
-        return []
-    changed = set(ctx.triggered_prop_ids)
-    navigation_only = changed <= {"pdf-current-page.data", "pdf-viewport-width.data"}
-    if navigation_only and mode == "continuous" and (scale != "fit" or "pdf-viewport-width.data" not in changed):
-        return no_update
-    if changed == {"pdf-viewport-width.data"} and scale != "fit":
-        return no_update
-    numbers = range(1, num_pages + 1) if mode == "continuous" else [max(1, min(int(page or 1), num_pages))]
-    return [
-        dpc.Page(
-            id={"type": "pdf-page", "index": number},
-            pageNumber=number,
-            width=max(1, viewport_width or PAGE_WIDTH) if scale == "fit" else PAGE_WIDTH,
-            scale=1 if scale == "fit" else float(scale or 1),
-            rotate=((rotation_clicks or 0) * 90) % 360,
-            renderForms=True,
-            error=html.Div("Unable to load page", role="alert"),
-            className="pdf-page",
-        )
-        for number in numbers
-    ]
-
-
-def render_thumbnails(num_pages):
-    return [
-        html.Div(
-            [
-                dpc.Thumbnail(id={"type": "pdf-thumbnail", "index": number}, pageNumber=number, width=130),
-                html.Div(f"Page {number}"),
-            ],
-            id={"type": "pdf-thumbnail-item", "index": number},
-            className="pdf-thumbnail",
-            **{"data-thumbnail-page": str(number)},
-        )
-        for number in range(1, (num_pages or 0) + 1)
-    ]
-
-
-def calculate_progress(progress, num_pages, error):
-    if error:
-        return 0, "exception"
-    if num_pages:
-        return 100, "success"
-    progress = progress or {}
-    total = progress.get("total", 0)
-    percent = min(100, max(0, round(progress.get("loaded", 0) / total * 100))) if total else 0
-    return percent, "active"
-
-
-def update_document(contents, _reset_clicks, _encrypted_clicks, _unlock_clicks, password):
-    if ctx.triggered_id == "pdf-unlock":
-        return no_update, password or "", ""
-    if ctx.triggered_id == "pdf-encrypted":
-        return get_asset_url(ENCRYPTED_PDF_ASSET), "", ""
-    return (contents if ctx.triggered_id == "pdf-upload" and contents else get_asset_url(PDF_ASSET)), "", ""
-
-
-def download_pdf(_n_clicks, file, filename):
-    if file and file.startswith("data:"):
-        return dcc.send_bytes(
-            base64.b64decode(file.split(",", 1)[1]), Path(filename or "document.pdf").name, type="application/pdf"
-        )
-    name = "quixote-encrypted.pdf" if file == get_asset_url(ENCRYPTED_PDF_ASSET) else "quixote.pdf"
-    return dcc.send_file(str(ASSETS / "documents" / name), type="application/pdf")
-
-
-def navigate(_previous, _next, requested_page, item_click, outline_click, thumbnail_clicks, num_pages, _file, current_page):
-    prop_id = ctx.triggered[0]["prop_id"] if ctx.triggered else ""
-    page = current_page or 1
-    if prop_id == "pdf-document.file":
-        page = 1
-    elif prop_id == "pdf-previous.n_clicks":
-        page -= 1
-    elif prop_id == "pdf-next.n_clicks":
-        page += 1
-    elif prop_id == "pdf-page-number.value":
-        page = requested_page or page
-    elif prop_id == "pdf-document.itemClickData" and item_click:
-        page = item_click["pageNumber"]
-    elif prop_id == "pdf-outline.itemClickData" and outline_click:
-        page = outline_click["pageNumber"]
-    elif "pdf-thumbnail" in prop_id:
-        latest = max((click for click in thumbnail_clicks or [] if click), key=lambda click: click["timestamp"], default=None)
-        if not latest:
-            return no_update, no_update
-        page = latest["pageNumber"]
-    page = max(1, min(int(page), num_pages or int(page)))
-    return page, page
-
-
-def zoom(_out, _in, _fit, scale, viewport_width):
-    if ctx.triggered_id == "pdf-fit-width":
-        return "fit"
-    current = (viewport_width or PAGE_WIDTH) / PAGE_WIDTH if scale == "fit" else float(scale or 1)
-    if ctx.triggered_id == "pdf-zoom-in":
-        return str(next((value for value in ZOOM_PRESETS if value > current + 0.001), ZOOM_PRESETS[-1]))
-    return str(next((value for value in reversed(ZOOM_PRESETS) if value < current - 0.001), ZOOM_PRESETS[0]))
-
-
-def select_thumbnails(page, _children, items):
-    return ["true" if item["index"] == (page or 1) else "false" for item in items]
-
-
-def status(num_pages, error, challenge, page):
-    ready = bool(num_pages)
-    page = page or 1
-    return (
-        f"/ {num_pages or '-'}",
-        num_pages or PAGE_COUNT,
-        not ready and not error and not challenge,
-        not ready or page <= 1,
-        not ready or page >= num_pages,
-        not ready,
-    )
-
-
-def register_callbacks(app, loading_output):
-    app.callback(
-        Output("pdf-current-page", "data"),
-        Output("pdf-page-number", "value"),
-        Input("pdf-previous", "n_clicks"),
-        Input("pdf-next", "n_clicks"),
-        Input("pdf-page-number", "value"),
-        Input("pdf-document", "itemClickData"),
-        Input("pdf-outline", "itemClickData"),
-        Input({"type": "pdf-thumbnail", "index": ALL}, "itemClickData"),
-        Input("pdf-document", "numPages"),
-        Input("pdf-document", "file"),
-        State("pdf-current-page", "data"),
-        prevent_initial_call=True,
-    )(navigate)
-    app.callback(
-        Output("pdf-scale", "value"),
-        Input("pdf-zoom-out", "n_clicks"),
-        Input("pdf-zoom-in", "n_clicks"),
-        Input("pdf-fit-width", "n_clicks"),
-        State("pdf-scale", "value"),
-        State("pdf-viewport-width", "data"),
-        prevent_initial_call=True,
-    )(zoom)
-    app.clientside_callback(
-        ClientsideFunction(namespace="pdfViewer", function_name="measure"),
-        Output("pdf-viewport-width", "data"),
-        Input("pdf-document", "numPages"),
-        Input("pdf-reading-mode", "value"),
-    )
-    app.clientside_callback(
-        ClientsideFunction(namespace="pdfViewer", function_name="scroll"),
-        Output("pdf-pages", "title"),
-        Input("pdf-current-page", "data"),
-        Input("pdf-reading-mode", "value"),
-        Input("pdf-pages", "children"),
-        Input("pdf-document", "itemClickData"),
-        Input("pdf-outline", "itemClickData"),
-        Input({"type": "pdf-thumbnail", "index": ALL}, "itemClickData"),
-        Input({"type": "pdf-page", "index": ALL}, "renderData"),
-    )
-    app.callback(
-        Output({"type": "pdf-thumbnail-item", "index": ALL}, "data-selected"),
-        Input("pdf-current-page", "data"),
-        Input("pdf-thumbnails", "children"),
-        State({"type": "pdf-thumbnail-item", "index": ALL}, "id"),
-    )(select_thumbnails)
-    app.callback(
-        Output("pdf-page-count", "children"),
-        Output("pdf-page-number", "max"),
-        loading_output,
-        Output("pdf-previous", "disabled"),
-        Output("pdf-next", "disabled"),
-        Output("pdf-download-button", "disabled"),
-        Input("pdf-document", "numPages"),
-        Input("pdf-document", "errorData"),
-        Input("pdf-document", "passwordData"),
-        Input("pdf-current-page", "data"),
-    )(status)
-    app.callback(
-        Output("pdf-pages", "children"),
-        Input("pdf-current-page", "data"),
-        Input("pdf-document", "numPages"),
-        Input("pdf-reading-mode", "value"),
-        Input("pdf-scale", "value"),
-        Input("pdf-rotate", "n_clicks"),
-        Input("pdf-viewport-width", "data"),
-    )(render_pages)
-    app.callback(Output("pdf-thumbnails", "children"), Input("pdf-document", "numPages"))(render_thumbnails)
-    app.callback(
-        Output("pdf-outline-empty", "children"),
-        Input("pdf-outline", "outlineData"),
-        Input("pdf-document", "numPages"),
-    )(lambda outline, count: "This document has no outline" if count and not outline else "")
-    app.callback(
-        Output("pdf-document", "file"),
-        Output("pdf-document", "password"),
-        Output("pdf-password-input", "value"),
-        Input("pdf-upload", "contents"),
-        Input("pdf-reset", "n_clicks"),
-        Input("pdf-encrypted", "n_clicks"),
-        Input("pdf-unlock", "n_clicks"),
-        State("pdf-password-input", "value"),
-        prevent_initial_call=True,
-        running=[(Output("pdf-unlock", "disabled"), True, False)],
-    )(update_document)
-    app.callback(
-        Output("pdf-download", "data"),
-        Input("pdf-download-button", "n_clicks"),
-        State("pdf-document", "file"),
-        State("pdf-upload", "filename"),
-        prevent_initial_call=True,
-    )(download_pdf)
-
-
-if UI == "antd":
-    import dash_antd_components as dac
-
-    def icon_button(id, icon, label):
-        return dac.Tooltip(
-            dac.Button(id=id, icon=dac.Icon(icon=icon, ariaLabel=label), shape="circle"),
-            title=label,
-        )
-
-    app = Dash(__name__, assets_folder=str(ASSETS))
-    app.layout = dac.ConfigProvider(
-        dac.Flex(
-            [
-                *stores(),
-                html.Div(id="pdf-message"),
-                dac.Space(
+                dcc.RadioItems(
+                    id="output-mode",
+                    options=[
+                        {"label": label, "value": mode}
+                        for label, mode in (("Preview", "viewer"), ("Download", "download"), ("Base64 to Python", "blob"))
+                    ],
+                    value="viewer",
+                    inline=True,
+                ),
+                html.Button("Generate PDF", id="generate-report", n_clicks=0),
+                dpc.PDF(
+                    id="generated",
+                    document=report_document("Dash PDF report", "Click Generate PDF to create the document."),
+                    autoGenerate=False,
+                    showDownload=True,
+                    fileName="report.pdf",
+                    style={"height": "55vh"},
+                ),
+                html.Div(id="generation-status", role="status"),
+                html.H2("Read an existing PDF"),
+                html.Div(
                     [
-                        dcc.Upload(
-                            dac.Button("Upload PDF"),
-                            id="pdf-upload",
-                            accept="application/pdf,.pdf",
-                            max_size=20 * 1024 * 1024,
+                        dcc.Upload(html.Button("Upload PDF"), id="upload", accept="application/pdf", multiple=False),
+                        html.Button("Previous", id="previous"),
+                        html.Button("Next", id="next"),
+                        html.Span(id="status"),
+                        dcc.Dropdown(
+                            id="scale",
+                            options=[{"label": f"{value:.0%}", "value": value} for value in (0.5, 0.75, 1, 1.25, 1.5, 2)],
+                            value=1,
+                            clearable=False,
+                            style={"width": "110px"},
                         ),
-                        dac.Button("Reset demo", id="pdf-reset"),
-                        dac.Button("Encrypted demo (password: dash-pdf)", id="pdf-encrypted"),
-                        dac.RadioGroup(
-                            id="pdf-reading-mode",
-                            options=[
-                                {"label": "Single page", "value": "single"},
-                                {"label": "Continuous", "value": "continuous"},
-                            ],
-                            value="single",
+                        html.Button("Rotate", id="rotate"),
+                        dcc.RadioItems(
+                            id="mode",
+                            options=[{"label": "Single page", "value": "single"}, {"label": "All pages", "value": "all"}],
+                            value="all",
+                            inline=True,
                         ),
+                        dcc.Input(id="password", type="password", placeholder="PDF password", debounce=True),
                     ],
-                    wrap=True,
+                    style={"display": "flex", "gap": "12px", "alignItems": "center", "flexWrap": "wrap"},
                 ),
-                dac.Space(
-                    [
-                        icon_button("pdf-previous", "left-outlined", "Previous page"),
-                        dac.InputNumber(id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, precision=0, style={"width": 88}),
-                        dac.Text(id="pdf-page-count", type="secondary"),
-                        icon_button("pdf-next", "right-outlined", "Next page"),
-                        icon_button("pdf-zoom-out", "zoom-out-outlined", "Zoom out"),
-                        dac.Select(id="pdf-scale", value="1", options=ZOOM_OPTIONS, style={"width": 120}),
-                        icon_button("pdf-zoom-in", "zoom-in-outlined", "Zoom in"),
-                        icon_button("pdf-fit-width", "column-width-outlined", "Fit width"),
-                        icon_button("pdf-rotate", "rotate-right-outlined", "Rotate"),
-                        icon_button("pdf-download-button", "download-outlined", "Download"),
-                    ],
-                    wrap=True,
-                    align="center",
-                ),
-                dac.Progress(id="pdf-progress", percent=0, size="small"),
-                dac.Space(
-                    [
-                        dac.Text("This PDF requires a password."),
-                        dac.Input(id="pdf-password-input", type="password", placeholder="PDF password", style={"width": 220}),
-                        dac.Button("Unlock", id="pdf-unlock", type="primary"),
-                    ],
-                    id="pdf-password-prompt",
-                    wrap=True,
-                    style={"display": "none"},
-                ),
-                dac.Spin(
-                    document(dac.Alert(title="Unable to load PDF", type="error", showIcon=True)),
-                    id="pdf-loading",
-                    spinning=True,
-                    style={"width": "100%"},
-                ),
+                viewer,
+                html.Div(id="error"),
             ],
-            vertical=True,
-            gap="middle",
-            style={"maxWidth": 960, "margin": "32px auto", "padding": "0 16px"},
-        ),
-        locale="en_US",
-    )
-    register_callbacks(app, Output("pdf-loading", "spinning"))
-
-    @app.callback(
-        Output("pdf-password-prompt", "style"), Output("pdf-message", "children"), Input("pdf-document", "passwordData")
-    )
-    def show_password_prompt(challenge):
-        if not challenge:
-            return {"display": "none"}, None
-        message = (
-            dac.Message("Incorrect password. Try again.", type="error", key=str(uuid4()))
-            if challenge.get("reason") == "incorrect-password"
-            else None
-        )
-        return {}, message
-
-    @app.callback(
-        Output("pdf-progress", "percent"),
-        Output("pdf-progress", "status"),
-        Input("pdf-document", "loadProgress"),
-        Input("pdf-document", "numPages"),
-        Input("pdf-document", "errorData"),
-    )
-    def show_progress(progress, num_pages, error):
-        return calculate_progress(progress, num_pages, error)
-
-
-elif UI == "mantine":
-    import dash_mantine_components as dmc
-    from dash_iconify import DashIconify
-
-    def icon_button(id, icon, label):
-        return dmc.Tooltip(
-            dmc.ActionIcon(
-                DashIconify(icon=f"tabler:{icon}", width=20),
-                id=id,
-                variant="default",
-                size="input-sm",
-                **{"aria-label": label},
-            ),
-            label=label,
+            style={"maxWidth": "960px", "margin": "auto"},
         )
 
-    app = Dash(__name__, assets_folder=str(ASSETS))
-    app.layout = dmc.MantineProvider(
-        dmc.Container(
-            dmc.Stack(
-                [
-                    *stores(),
-                    dmc.NotificationContainer(id="pdf-message", position="top-center"),
-                    dmc.Group(
-                        [
-                            dcc.Upload(
-                                dmc.Button("Upload PDF", variant="default"),
-                                id="pdf-upload",
-                                accept="application/pdf,.pdf",
-                                max_size=20 * 1024 * 1024,
-                            ),
-                            dmc.Button("Reset demo", id="pdf-reset", variant="default"),
-                            dmc.Button("Encrypted demo (password: dash-pdf)", id="pdf-encrypted", variant="default"),
-                            dmc.SegmentedControl(
-                                id="pdf-reading-mode",
-                                value="single",
-                                data=[
-                                    {"label": "Single page", "value": "single"},
-                                    {"label": "Continuous", "value": "continuous"},
-                                ],
-                            ),
-                        ],
-                        gap="sm",
-                        wrap="wrap",
-                    ),
-                    dmc.Group(
-                        [
-                            icon_button("pdf-previous", "chevron-left", "Previous page"),
-                            dmc.NumberInput(id="pdf-page-number", value=1, min=1, max=PAGE_COUNT, allowDecimal=False, w=88),
-                            dmc.Text(id="pdf-page-count", c="dimmed", size="sm"),
-                            icon_button("pdf-next", "chevron-right", "Next page"),
-                            icon_button("pdf-zoom-out", "zoom-out", "Zoom out"),
-                            dmc.Select(id="pdf-scale", value="1", data=ZOOM_OPTIONS, allowDeselect=False, w=120),
-                            icon_button("pdf-zoom-in", "zoom-in", "Zoom in"),
-                            icon_button("pdf-fit-width", "arrows-horizontal", "Fit width"),
-                            icon_button("pdf-rotate", "rotate-clockwise", "Rotate"),
-                            icon_button("pdf-download-button", "download", "Download"),
-                        ],
-                        gap="xs",
-                        wrap="wrap",
-                    ),
-                    dmc.Group(
-                        [
-                            dmc.Progress(id="pdf-progress", value=0, style={"flex": 1}, **{"aria-label": "PDF loading progress"}),
-                            dmc.Text(id="pdf-progress-label", size="sm", w=40),
-                        ],
-                        gap="sm",
-                    ),
-                    dmc.Group(
-                        [
-                            dmc.Text("This PDF requires a password.", size="sm"),
-                            dmc.PasswordInput(id="pdf-password-input", placeholder="PDF password", w=220),
-                            dmc.Button("Unlock", id="pdf-unlock"),
-                        ],
-                        id="pdf-password-prompt",
-                        wrap="wrap",
-                        style={"display": "none"},
-                    ),
-                    dmc.Box(
-                        [
-                            document(dmc.Alert("Unable to load PDF", color="red", title="PDF error")),
-                            dmc.LoadingOverlay(id="pdf-loading", visible=True, loaderProps={"type": "oval"}, zIndex=10),
-                        ],
-                        pos="relative",
-                    ),
-                ],
-                gap="md",
-            ),
-            size=960,
-            my=32,
-        ),
-        defaultColorScheme="light",
-    )
-    register_callbacks(app, Output("pdf-loading", "visible"))
-
-    @app.callback(
-        Output("pdf-password-prompt", "style"),
-        Output("pdf-message", "sendNotifications"),
-        Input("pdf-document", "passwordData"),
-    )
-    def show_password_prompt(challenge):
-        if not challenge:
-            return {"display": "none"}, []
-        notifications = (
-            [{"action": "show", "id": str(uuid4()), "message": "Incorrect password. Try again.", "color": "red"}]
-            if challenge.get("reason") == "incorrect-password"
-            else []
+        @app.callback(
+            Output("generated", "document"),
+            Output("generated", "n_generate"),
+            Input("generate-report", "n_clicks"),
+            State("report-title", "value"),
+            State("report-text", "value"),
+            prevent_initial_call=True,
         )
-        return {}, notifications
+        def generate_report(clicks, title, text):
+            return report_document(title or "Report", text or ""), clicks
 
-    @app.callback(
-        Output("pdf-progress", "value"),
-        Output("pdf-progress", "color"),
-        Output("pdf-progress-label", "children"),
-        Input("pdf-document", "loadProgress"),
-        Input("pdf-document", "numPages"),
-        Input("pdf-document", "errorData"),
-    )
-    def show_progress(progress, num_pages, error):
-        percent, status = calculate_progress(progress, num_pages, error)
-        return percent, {"exception": "red", "success": "teal", "active": "blue"}[status], f"{percent}%"
+        @app.callback(
+            Output("generated", "mode"),
+            Output("generated", "returnBase64"),
+            Output("generated", "style"),
+            Input("output-mode", "value"),
+        )
+        def output_mode(mode):
+            return mode, mode == "blob", {"height": "55vh"} if mode == "viewer" else {}
+
+        @app.callback(
+            Output("generation-status", "children"),
+            Input("generated", "generating"),
+            Input("generated", "errorData"),
+            Input("generated", "size"),
+            Input("generated", "data"),
+        )
+        def generation_status(generating, error, size, data):
+            if error:
+                return error["message"]
+            if generating:
+                return "Generating PDF…"
+            if data:
+                return f"Python received {len(base64.b64decode(data)):,} PDF bytes."
+            return f"PDF generated: {size:,} bytes." if size else "Ready to generate."
+
+        @app.callback(
+            Output("pdf", "pageNumber"),
+            Input("previous", "n_clicks"),
+            Input("next", "n_clicks"),
+            State("pdf", "pageNumber"),
+            State("pdf", "numPages"),
+            prevent_initial_call=True,
+        )
+        def navigate(_previous, _next, page, count):
+            if not count:
+                return no_update
+            step = -1 if ctx.triggered_id == "previous" else 1
+            return max(1, min((page or 1) + step, count))
+
+        @app.callback(Output("pdf", "file"), Input("upload", "contents"), prevent_initial_call=True)
+        def upload(contents):
+            return contents or no_update
+
+        @app.callback(Output("pdf", "scale"), Input("scale", "value"))
+        def zoom(value):
+            return value
+
+        @app.callback(Output("pdf", "rotate"), Input("rotate", "n_clicks"), prevent_initial_call=True)
+        def rotate(clicks):
+            return ((clicks or 0) * 90) % 360
+
+        @app.callback(Output("pdf", "pages"), Input("mode", "value"))
+        def reading_mode(mode):
+            return "all" if mode == "all" else None
+
+        @app.callback(Output("pdf", "password"), Input("password", "value"), prevent_initial_call=True)
+        def password(value):
+            return value or ""
+
+        @app.callback(
+            Output("status", "children"),
+            Output("error", "children"),
+            Input("pdf", "pageNumber"),
+            Input("pdf", "numPages"),
+            Input("pdf", "errorData"),
+            Input("pdf", "passwordData"),
+        )
+        def status(page, count, error, challenge):
+            message = (error or {}).get("message", "")
+            if challenge:
+                message = "Enter the PDF password." if challenge["reason"] == "need-password" else "Incorrect PDF password."
+            return f"{page or 1} / {count or '—'}", message
+
+    return app
 
 
-else:
-    app = Dash(__name__, assets_folder=str(ASSETS))
-    app.layout = basic_usage()
-
+app = create_app(os.environ.get("PDF_DEMO", "default"))
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+    app.run(debug=True)
