@@ -134,7 +134,7 @@ const Document = ({
           }
           onPassword={(callback, reason) => {
             passwordCallback.current = callback;
-            if (password) {
+            if (password && reason === pdfjs.PasswordResponses.NEED_PASSWORD) {
               callback(password);
               passwordCallback.current = null;
             } else {

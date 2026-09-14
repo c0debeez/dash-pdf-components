@@ -37,7 +37,7 @@ def create_demo_pdf() -> str:
     return "data:application/pdf;base64," + base64.b64encode(document).decode()
 
 
-app = Dash(__name__)
+app = Dash(__name__, serve_locally=False)
 app.layout = html.Main(
     [
         html.H2("dash-pdf-components"),
@@ -127,4 +127,4 @@ def show_page(page, num_pages):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
