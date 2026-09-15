@@ -13,7 +13,7 @@
     "access": "public"
   },
   "scripts": {
-    "build:backends": "python scripts/clean_generated.py && python scripts/generate_typing.py && dash-generate-components ./src/components dash_pdf_components -p package-info.json --ignore \"(\\\\.test\\\\.|fragments/)\" && python scripts/fix_proptypes.py",
+    "build:backends": "python scripts/clean_generated.py && python scripts/generate_typing.py && dash-generate-components ./src/components dash_pdf_components -p package-info.json --ignore \"(\\\\.test\\\\.|fragments/)\"",
     "build:js::dev": "webpack --config webpack.config.js --env development",
     "build:js": "rimraf \"dash_pdf_components/async-*.js\" \"dash_pdf_components/*.js.map\" dash_pdf_components/pdfjs && webpack --config webpack.config.js",
     "build": "pnpm run build:backends && pnpm run build:js",
