@@ -118,7 +118,7 @@ The upstream document primitives include `Document`, `Page`, `View`, `Text`, `Im
 
 `fonts`, `fontAction`, `fontDescriptors`, `emojiSource`, and `hyphenationCallback` configure generation. `fontFamilies`, `fontInfo`, and `rendererVersion` expose diagnostics. Fonts must include the glyphs used in your document. Browser URLs, data URLs, image byte arrays, and supported source dictionaries are accepted; Python filesystem paths are not browser sources.
 
-Named JavaScript functions use `{"function": "gallery.name", "options": {...}}`, registered in `window.dashPdfRendererComponentsFunctions`. The registry name is retained for compatibility with preserved examples. Callbacks receive their upstream arguments followed by options and context; generation context includes `createElement`, PDF primitives, and the output ID. Raw Python functions or JavaScript source strings are not component properties. The old synchronous top-level JS `createPDFElement` export is not retained; use the supplied callback context.
+Named JavaScript functions use `{"function": "gallery.name", "options": {...}}`, registered in `window.dashPdfComponentsFunctions`. Callbacks receive their upstream arguments followed by options and context; generation context includes `createElement`, PDF primitives, and the output ID. Raw Python functions or JavaScript source strings are not component properties. The old synchronous top-level JS `createPDFElement` export is not retained; use the supplied callback context.
 
 Font-dependent generation jobs are serialized and per-job settings restored. Superseded jobs cannot publish results. `Text.renderTemplate` adapts page-number text; Canvas accepts JSON drawing `operations`. Editable forms inside a PDF do not update Dash properties.
 
@@ -150,26 +150,6 @@ The gallery serves cached fonts, images, emoji, and named callbacks from `assets
 
 The adjacent `dash-antd-components/docs` PDF page includes existing-file reading, all 75 generated examples through `PDFReaderAIO`, and manual download/Base64 output. AIO owns pagination, zoom, rotation, password entry, theme, and download controls, keeping Ant Design out of this package's runtime dependencies. To develop that docs app, install this checkout into its environment, then run the docs app using its README instructions.
 
-## Documentation and MCP
-
-The adjacent [Ant Design docs application](../dash-antd-components/docs/README.md)
-provides complete Chinese and English API tables for `PDF` and all 30 document,
-SVG and form primitives. It explains the underlying libraries, fonts, styles,
-named callbacks, and output modes. In the “Generate PDF” example, selecting a
-document and viewing its code shows that document's standalone implementation.
-
-Its read-only MCP endpoint `/_mcp` exposes:
-
-- `dpc_get_library_info`: installed version, component and example counts.
-- `dpc_list_components` / `dpc_get_component`: component properties, types, defaults and PDF.js options.
-- `dpc_search_props`: search property names and bilingual descriptions.
-- `dpc_get_examples`: search 75 generation examples and four docs demos; request an ID for source and asset requirements.
-
-For example, call `dpc_get_component` with `{"component": "PDF", "prop": "document"}`,
-or `dpc_get_examples` with `{"example_id": "playground-svg"}`. The DPC catalog stays
-separate from DAC, so `dpc.Text` and `dac.Text` have distinct documentation.
-Restart the docs application after updating this package or its example inventory.
-
 ## Migration from the separate libraries
 
 | Previous interface | Unified interface |
@@ -184,17 +164,3 @@ Restart the docs application after updating this package or its example inventor
 | Status `render` / custom download children | Ordinary Dash callback UI / `downloadLabel` |
 
 The old output wrappers are not exported. Older reader `Document + Page` composition becomes `PDF(file=..., pageNumber=...)`; the new Document/Page describe generated content. Reader Outline/Thumbnail wrappers are not provided. This is a breaking 0.2 release with Dash 3 as the minimum version.
-
-## Development and distribution
-
-```bash
-pnpm run lint
-uv run pyright
-uv run pytest -q -m 'not browser'
-uv run pytest -q -m browser           # requires Chrome and chromedriver
-pnpm run build
-pnpm run dist
-uv run python scripts/check_packages.py
-```
-
-`pnpm run sync:api` audits upstream declarations and refreshes document-node wrappers/types without replacing the authored PDF entry. `pnpm run build:examples` rebuilds saved descriptor conversions and browser callbacks from the preserved upstream sources. The wheel ships the component runtime; the source distribution additionally contains source, gallery, and demo assets. Generated Python/JS artifacts are ignored by Git and must be built before packaging.

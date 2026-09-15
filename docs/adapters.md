@@ -8,7 +8,7 @@ Generation uses a separate lazy renderer module. PDF.js display uses a separate 
 
 PDF document styles are distinct from PDF container CSS. `width` and `height` size reader pages; `style` sizes the HTML container. `children` remains page overlay content. Generated document trees always go in `document`.
 
-Function props accept named references registered in `window.dashPdfRendererComponentsFunctions`, never executable code strings. Their context provides `createElement` and primitives. Text templates and Canvas operations are JSON adaptations. Dates use ISO timestamps. Images use browser-accessible URLs, byte arrays, or supported dictionaries.
+Function props accept named references registered in `window.dashPdfComponentsFunctions`, never executable code strings. Their context provides `createElement` and primitives. Text templates and Canvas operations are JSON adaptations. Dates use ISO timestamps. Images use browser-accessible URLs, byte arrays, or supported dictionaries.
 
 Font configuration is scoped around serialized jobs, and stale jobs cannot publish. Blob URLs are released on replacement/unmount after preview cleanup. They cannot be fetched by Python or treated as persistent addresses. User-provided URLs are not revoked.
 

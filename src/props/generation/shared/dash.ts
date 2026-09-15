@@ -1,7 +1,7 @@
 import type * as Renderer from "@react-pdf/renderer";
 export type PDFStyle = Renderer.Styles[string] & Record<string, any>;
 export interface FunctionProps {
-  /** Own function path in window.dashPdfRendererComponentsFunctions. */
+  /** Own function path in window.dashPdfComponentsFunctions. */
   function: string;
   /** JSON options appended after the original callback arguments. */
   options?: Record<string, any>;

@@ -81,7 +81,7 @@ HTML 通用属性仅用于真正的 HTML 输出容器。PDF 节点的 `id` 需�
 
 ### 3.4 函数型 API（Q2 已确认）
 
-已确认采用 `{function: "namespace.name", options: {...}}`，解析到本库专用 `window.dashPdfRendererComponentsFunctions` 注册表。沿用 antd 的“底层参数 + options + context”约定，逐 API 记录实际签名。
+已确认采用 `{function: "namespace.name", options: {...}}`，解析到本库专用 `window.dashPdfComponentsFunctions` 注册表。沿用 antd 的“底层参数 + options + context”约定，逐 API 记录实际签名。
 
 仅解析明确的函数型字段；不对任意 style/图片配置里的 function 键进行无差别递归解释。禁止 eval/字符串代码执行；使用自有数据属性查找，拒绝原型链和 getter，校验 JSON options，缺失引用通过 error 明确报告。
 

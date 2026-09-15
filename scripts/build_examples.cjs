@@ -168,7 +168,7 @@ const plugin = (browser) => ({
     const browserEntry = path.join(workspace, example.id + "-browser.mjs");
     fs.writeFileSync(
       browserEntry,
-      `import entry from ${JSON.stringify(entry)};window.dashPdfRendererComponentsFunctions ||= {};window.dashPdfRendererComponentsFunctions.official ||= {};window.dashPdfRendererComponentsFunctions.official[entry.prefix]=entry.functions;`,
+      `import entry from ${JSON.stringify(entry)};window.dashPdfComponentsFunctions ||= {};window.dashPdfComponentsFunctions.official ||= {};window.dashPdfComponentsFunctions.official[entry.prefix]=entry.functions;`,
     );
     const compiled = await esbuild.build({
       entryPoints: [browserEntry],

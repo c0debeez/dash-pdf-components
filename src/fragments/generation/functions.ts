@@ -54,13 +54,13 @@ export function resolveFunction(
     throw new Error("Invalid function reference path.");
   let current: any = Object.getOwnPropertyDescriptor(
     window,
-    "dashPdfRendererComponentsFunctions",
+    "dashPdfComponentsFunctions",
   )?.value;
   for (const part of parts)
     current = current && Object.getOwnPropertyDescriptor(current, part)?.value;
   if (typeof current !== "function")
     throw new Error(
-      `Function ${reference.function} is not registered in window.dashPdfRendererComponentsFunctions.`,
+      `Function ${reference.function} is not registered in window.dashPdfComponentsFunctions.`,
     );
   const options = cloneJSON(reference.options ?? {});
   return (...args) => current(...args, options, context);
