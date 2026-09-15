@@ -1,6 +1,6 @@
 {
   "name": "dash-pdf-components",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "PDF generation and viewing components for Plotly Dash",
   "main": "dash_pdf_components/dash_pdf_components.js",
   "unpkg": "dash_pdf_components/dash_pdf_components.js",
