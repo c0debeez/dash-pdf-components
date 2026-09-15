@@ -2,6 +2,8 @@
 
 Generate, display, and download PDFs in Plotly Dash through one `PDF` output component. `Document`, `Page`, `Text`, image, SVG, and form components describe documents to generate; they do not render HTML.
 
+GitHub: [https://github.com/c0debeez/dash-pdf-components](https://github.com/c0debeez/dash-pdf-components)
+
 ```bash
 uv add dash-pdf-components
 ```
