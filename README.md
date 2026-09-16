@@ -151,18 +151,3 @@ PDF_DEMO=gallery python usage.py       # all 75 generated examples
 The gallery serves cached fonts, images, emoji, and named callbacks from `assets/`. Some source examples are large: the image stress test generates about 100 MB and the full Don Quixote requires more processing time. Downloads and Base64 jobs are manual in the gallery.
 
 The adjacent `dash-antd-components/docs` PDF page includes existing-file reading, all 75 generated examples through `PDFReaderAIO`, and manual download/Base64 output. AIO owns pagination, zoom, rotation, password entry, theme, and download controls, keeping Ant Design out of this package's runtime dependencies. To develop that docs app, install this checkout into its environment, then run the docs app using its README instructions.
-
-## Migration from the separate libraries
-
-| Previous interface | Unified interface |
-| --- | --- |
-| `dash_pdf_renderer_components.Document/Page/Text/...` | `dash_pdf_components.Document/Page/Text/...` |
-| `PDFViewer(children=document)` | `PDF(document=document, mode="viewer")` |
-| `BlobProvider(document=document)` | `PDF(document=document, mode="blob")` |
-| `PDFDownloadLink(document=document)` | `PDF(document=document, mode="download")` |
-| Output `loading` / error string `error` | `generating` / structured `errorData` |
-| Viewer CSS width/height | `PDF.style` width/height |
-| `previewMode="playground"` | `previewMode="pdfjs"`, with optional AIO controls |
-| Status `render` / custom download children | Ordinary Dash callback UI / `downloadLabel` |
-
-The old output wrappers are not exported. Older reader `Document + Page` composition becomes `PDF(file=..., pageNumber=...)`; the new Document/Page describe generated content. Reader Outline/Thumbnail wrappers are not provided. This is a breaking 0.2 release with Dash 3 as the minimum version.
