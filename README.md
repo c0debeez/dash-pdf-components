@@ -1,12 +1,14 @@
 # dash-pdf-components
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 Generate, display, and download PDFs in Plotly Dash through one `PDF` output component. `Document`, `Page`, `Text`, image, SVG, and form components describe documents to generate; they do not render HTML.
 
 ```bash
 uv add dash-pdf-components
 ```
 
-Python 3.10+ and Dash 3+ are required. The frontend uses `@react-pdf/renderer` for generation and React-PDF/PDF.js for display. React and ReactDOM are provided by Dash. Ant Design is optional and is not a package dependency.
+Python 3.10+ and Dash 3+ are required. The frontend uses `@react-pdf/renderer` for generation and React-PDF/PDF.js for display. React and ReactDOM are provided by Dash.
 
 ## Display an existing PDF
 
@@ -29,7 +31,7 @@ if __name__ == "__main__":
 
 Keep the sample `assets/` directory alongside this example, or use your own PDF URL. `file` accepts a URL, upload data URI, `{"url": "..."}`, or `{"data": [37, 80, 68, 70, ...]}`. Cross-origin resources require browser access permission. `None` clears the input.
 
-Omit `pages` to show `pageNumber`, use `"all"` for continuous reading, or an ordered list such as `[1, 3, 5]`. Duplicate, invalid, and out-of-range pages are filtered. In continuous reading, navigation scrolls to the target and scrolling updates `pageNumber`. Internal links outside an explicit selection emit `itemClickData` without changing the selection. The legacy `pageNumber="all"` is deprecated.
+Omit `pages` to show `pageNumber`, use `"all"` for continuous reading, or an ordered list such as `[1, 3, 5]`. Duplicate, invalid, and out-of-range pages are filtered. In continuous reading, navigation scrolls to the target and scrolling updates `pageNumber`. Internal links outside an explicit selection emit `itemClickData` without changing the selection.
 
 `fit="width"` fits the available width. `fit="page"` fits both dimensions and needs an explicit container height. `scale` multiplies the fitted size; `rotate` controls page rotation. `width` and `height` describe page dimensions; set container dimensions through `style`.
 
@@ -133,11 +135,11 @@ The main entry contains only public wrappers and the controller. Generation and 
 
 Matching PDF.js Worker, CMaps, standard fonts, WASM, ICC, and annotation image resources are packaged locally. `assetBaseUrl`, `workerSrc`, `imageResourcesPath`, and individual PDF.js `options` override reader resource defaults. Laziness reduces browser transfer and execution; installation still includes both engines.
 
-## Preserved official examples and Ant Design reader
+## Preserved official examples
 
 Examples and their demo assets are retained in Git but excluded from release archives. Run the gallery from a source checkout.
 
-The complete `examples/` snapshot and conversions from the companion renderer project are preserved: 31 repository examples and 44 Playground templates, including upstream source and licenses. The original `../dash-pdf-renderer-components/examples` is left intact. See [example sources and resources](examples/README.md).
+The complete `examples/` snapshot and conversions from the companion renderer project are preserved: 31 repository examples and 44 Playground templates, including upstream source. The original `../dash-pdf-renderer-components/examples` is left intact. See [example sources and resources](examples/README.md).
 
 ```bash
 uv sync
@@ -149,5 +151,3 @@ PDF_DEMO=gallery python usage.py       # all 75 generated examples
 ```
 
 The gallery serves cached fonts, images, emoji, and named callbacks from `assets/`. Some source examples are large: the image stress test generates about 100 MB and the full Don Quixote requires more processing time. Downloads and Base64 jobs are manual in the gallery.
-
-The adjacent `dash-antd-components/docs` PDF page includes existing-file reading, all 75 generated examples through `PDFReaderAIO`, and manual download/Base64 output. AIO owns pagination, zoom, rotation, password entry, theme, and download controls, keeping Ant Design out of this package's runtime dependencies. To develop that docs app, install this checkout into its environment, then run the docs app using its README instructions.

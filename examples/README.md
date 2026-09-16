@@ -4,7 +4,7 @@
 
 ## Sources
 
-The repository snapshot is pinned to [ca8a425bdfb9a8ab9b26e724cd747431372fe147](https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples). Its source files and public assets are preserved in `upstream/apps/examples/`; pre-rendered PDF outputs are excluded. `upstream/LICENSE` retains the upstream MIT license.
+The repository snapshot is pinned to [ca8a425bdfb9a8ab9b26e724cd747431372fe147](https://github.com/diegomura/react-pdf/tree/ca8a425bdfb9a8ab9b26e724cd747431372fe147/apps/examples/src/examples). Its source files and public assets are preserved in `upstream/apps/examples/`; pre-rendered PDF outputs are excluded.
 
 `upstream/playground.json` preserves all 44 template source strings served by [React-PDF Playground](https://react-pdf.org/playground) on September 14, 2026. `data/manifest.json` lists each example and its source link.
 
@@ -26,4 +26,4 @@ The repository image stress test contains 86 full-resolution images and generate
 
 The source distribution contains the gallery and assets; the wheel contains the component library. Run `usage.py` from the project/source distribution directory.
 
-The complete source snapshot is also retained in the original renderer project. The adjacent Ant Design docs PDF page uses these conversions with the unified PDF component and AIO controls.
+The complete source snapshot is also retained in the original renderer project.
