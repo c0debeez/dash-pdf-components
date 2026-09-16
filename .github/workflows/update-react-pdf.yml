@@ -1,4 +1,4 @@
-name: Update React-PDF
+name: Update PDF dependencies
 
 on:
   schedule:
@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: update-react-pdf
+  group: update-pdf-dependencies
   cancel-in-progress: false
 
 jobs:
@@ -34,7 +34,7 @@ jobs:
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Check and update React-PDF and matching PDF.js
+      - name: Check and update PDF dependencies
         id: update
         run: node .github/scripts/update-react-pdf.mjs
 
@@ -70,16 +70,20 @@ jobs:
         if: steps.update.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
-          branch: automation/update-react-pdf
+          branch: automation/update-pdf-dependencies
           base: ${{ github.event.repository.default_branch }}
           delete-branch: true
           add-paths: |
             package.json
             pnpm-lock.yaml
-          commit-message: "chore(deps): update react-pdf to ${{ steps.update.outputs.version }}"
-          title: "chore(deps): update react-pdf to ${{ steps.update.outputs.version }}"
+          commit-message: "chore(deps): update PDF dependencies"
+          title: "chore(deps): update PDF dependencies"
           body: |
-            Update React-PDF to `${{ steps.update.outputs.version }}` and its matching PDF.js dependency to `${{ steps.update.outputs.pdfjs-version }}`.
+            Update the React 18-compatible PDF dependencies:
+
+            - React-PDF: `${{ steps.update.outputs.react_pdf_version }}` (pinned to v10 because v11 requires React 19)
+            - PDF.js: `${{ steps.update.outputs.pdfjs_version }}` (must match React-PDF exactly)
+            - @react-pdf/renderer: `${{ steps.update.outputs.renderer_version }}`
 
             Updates package.json and the pnpm lockfile. Generated build files remain ignored.
 
