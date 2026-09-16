@@ -2,8 +2,6 @@
 
 Generate, display, and download PDFs in Plotly Dash through one `PDF` output component. `Document`, `Page`, `Text`, image, SVG, and form components describe documents to generate; they do not render HTML.
 
-GitHub: [https://github.com/c0debeez/dash-pdf-components](https://github.com/c0debeez/dash-pdf-components)
-
 ```bash
 uv add dash-pdf-components
 ```
@@ -136,6 +134,8 @@ The main entry contains only public wrappers and the controller. Generation and 
 Matching PDF.js Worker, CMaps, standard fonts, WASM, ICC, and annotation image resources are packaged locally. `assetBaseUrl`, `workerSrc`, `imageResourcesPath`, and individual PDF.js `options` override reader resource defaults. Laziness reduces browser transfer and execution; installation still includes both engines.
 
 ## Preserved official examples and Ant Design reader
+
+Examples and their demo assets are retained in Git but excluded from release archives. Run the gallery from a source checkout.
 
 The complete `examples/` snapshot and conversions from the companion renderer project are preserved: 31 repository examples and 44 Playground templates, including upstream source and licenses. The original `../dash-pdf-renderer-components/examples` is left intact. See [example sources and resources](examples/README.md).
 
